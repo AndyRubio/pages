@@ -1,141 +1,42 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Piano Practice Routines</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Schedule text</title>
+  <style>
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background:#0b0f19;
+      color:#e9eefc;
+      line-height:1.6;
+    }
+    .wrap{
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    .card{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 34px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    .text{
+      font-size: 20px;
+      letter-spacing: 0.2px;
+      color: rgba(233,238,252,0.96);
+      margin: 0;
+    }
+  </style>
 </head>
-<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
-
-  <div style="max-width: 800px; margin: 40px auto; padding: 20px 25px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.12);">
-    
-    <h1 style="text-align:center; margin-top: 0; margin-bottom: 20px; font-size: 26px;">
-      Piano Practice Routines
-    </h1>
-
-    <!-- 30-Minute Routine -->
-    <section style="margin-bottom: 32px;">
-      <h2 style="font-size: 22px; margin-bottom: 10px;">
-        30-Minute Routine (Tight, Focused)
-      </h2>
-
-      <h3 style="font-size: 18px; margin-bottom: 6px; margin-top: 16px;">
-        1. Warm-up – 5 minutes
-      </h3>
-      <ul style="margin-top: 4px; margin-bottom: 8px; padding-left: 20px; line-height: 1.4;">
-        <li>Slow scales (1–2 keys/day), hands separately → hands together.</li>
-        <li>One short technical pattern: broken chords or a Hanon/Firman exercise at a controlled tempo.</li>
-      </ul>
-
-      <h3 style="font-size: 18px; margin-bottom: 6px; margin-top: 16px;">
-        2. Technique &amp; Foundation – 5 minutes
-      </h3>
-      <p style="margin: 4px 0;">Pick one per session:</p>
-      <ul style="margin-top: 4px; margin-bottom: 8px; padding-left: 20px; line-height: 1.4;">
-        <li>Arpeggios (major/minor of the day)</li>
-        <li>Contrary-motion scales</li>
-        <li>Simple chord progressions in multiple inversions</li>
-      </ul>
-      <p style="margin-top: 4px; margin-bottom: 10px;">
-        Focus on clean, even, relaxed playing.
-      </p>
-
-      <h3 style="font-size: 18px; margin-bottom: 6px; margin-top: 16px;">
-        3. Sight-Reading – 5 minutes
-      </h3>
-      <ul style="margin-top: 4px; margin-bottom: 8px; padding-left: 20px; line-height: 1.4;">
-        <li>A fresh short piece every session (chorales, simple classical miniatures, easy études).</li>
-        <li>Do not stop for mistakes—maintain a steady tempo.</li>
-      </ul>
-
-      <h3 style="font-size: 18px; margin-bottom: 6px; margin-top: 16px;">
-        4. Repertoire (Core Pieces) – 12 minutes
-      </h3>
-      <ul style="margin-top: 4px; margin-bottom: 8px; padding-left: 20px; line-height: 1.4;">
-        <li><strong>6 min:</strong> Isolate trouble spots (2–4 measure loops at slow tempo).</li>
-        <li><strong>6 min:</strong> Connect previously fixed sections; play at about 70–85% tempo.</li>
-      </ul>
-      <p style="margin-top: 4px; margin-bottom: 10px;">
-        Don’t waste time polishing what’s already solid.
-      </p>
-
-      <h3 style="font-size: 18px; margin-bottom: 6px; margin-top: 16px;">
-        5. Cool-down / Musicianship – 3 minutes
-      </h3>
-      <ul style="margin-top: 4px; margin-bottom: 0; padding-left: 20px; line-height: 1.4;">
-        <li>Play one piece you know well, gently and musically, <em>or</em></li>
-        <li>Improvise quietly around a simple chord progression.</li>
-      </ul>
-    </section>
-
-    <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
-
-    <!-- 60-Minute Routine -->
-    <section>
-      <h2 style="font-size: 22px; margin-bottom: 10px;">
-        60-Minute Routine (Complete, Well-Rounded)
-      </h2>
-
-      <h3 style="font-size: 18px; margin-bottom: 6px; margin-top: 16px;">
-        1. Warm-up – 8 minutes
-      </h3>
-      <ul style="margin-top: 4px; margin-bottom: 8px; padding-left: 20px; line-height: 1.4;">
-        <li>Scales in 3–4 keys (major + relative minor).</li>
-        <li>One technical study: Hanon, Pischna, Dohnányi, or a Czerny excerpt.</li>
-      </ul>
-      <p style="margin-top: 4px; margin-bottom: 10px;">
-        Accuracy first; increase speed only when everything is even and controlled.
-      </p>
-
-      <h3 style="font-size: 18px; margin-bottom: 6px; margin-top: 16px;">
-        2. Technique &amp; Drill Work – 10 minutes
-      </h3>
-      <p style="margin: 4px 0;">Rotate through:</p>
-      <ul style="margin-top: 4px; margin-bottom: 8px; padding-left: 20px; line-height: 1.4;">
-        <li>Arpeggios (all inversions).</li>
-        <li>Octave exercises.</li>
-        <li>Trills or finger-independence drills.</li>
-        <li>Voicing practice (melody louder than accompaniment).</li>
-      </ul>
-      <p style="margin-top: 4px; margin-bottom: 10px;">
-        Keep blocks short and concentrated rather than long and sloppy.
-      </p>
-
-      <h3 style="font-size: 18px; margin-bottom: 6px; margin-top: 16px;">
-        3. Sight-Reading – 7 minutes
-      </h3>
-      <ul style="margin-top: 4px; margin-bottom: 8px; padding-left: 20px; line-height: 1.4;">
-        <li>One or two short pieces.</li>
-        <li>Keep your eyes ahead, recognize patterns, and don’t stop to fix errors mid-stream.</li>
-        <li>Use graded sight-reading books or simple classical repertoire.</li>
-      </ul>
-
-      <h3 style="font-size: 18px; margin-bottom: 6px; margin-top: 16px;">
-        4. Repertoire Work – 30 minutes
-      </h3>
-      <p style="margin: 4px 0;">Break it down intelligently:</p>
-      <ul style="margin-top: 4px; margin-bottom: 8px; padding-left: 20px; line-height: 1.4;">
-        <li><strong>10 min:</strong> Hardest sections → ultra-slow practice, rhythmic variation, hands separate as needed.</li>
-        <li><strong>10 min:</strong> Medium-difficulty passages → phrase shaping, articulation, dynamics.</li>
-        <li><strong>10 min:</strong> Run larger sections or the full piece; note where things fall apart.</li>
-      </ul>
-      <p style="margin-top: 4px; margin-bottom: 10px;">
-        Any weak spots you notice become the focus of the next session’s isolation work.
-      </p>
-
-      <h3 style="font-size: 18px; margin-bottom: 6px; margin-top: 16px;">
-        5. Cool-down / Ear &amp; Creativity – 5 minutes
-      </h3>
-      <p style="margin: 4px 0;">Pick one to finish:</p>
-      <ul style="margin-top: 4px; margin-bottom: 0; padding-left: 20px; line-height: 1.4;">
-        <li>Play something familiar at a slow, expressive tempo.</li>
-        <li>Improvise over a ii–V–I or another simple progression.</li>
-        <li>Do a quick ear drill (intervals or chord quality recognition at the keyboard).</li>
-      </ul>
-    </section>
-
+<body>
+  <div class="wrap">
+    <div class="card">
+      <p class="text">With 1 hour/day and no deadline, the optimal strategy is slow parallel learning with perpetual overlearning.</p>
+    </div>
   </div>
-
 </body>
 </html>
-```
