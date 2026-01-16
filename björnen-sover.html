@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Piano Practice Algorithm (28 bars)</title>
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --card:#11131a;
+      --text:#e8e9ee;
+      --muted:#b7bccb;
+      --line:#242838;
+      --accent:#7aa2ff;
+      --good:#47d18c;
+      --warn:#ffcc66;
+      --bad:#ff6b6b;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 20% 0%, #121528 0%, var(--bg) 45%, #07080c 100%);
+      color:var(--text);
+      line-height:1.5;
+    }
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 16px 56px;
+    }
+    header{
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    h1{
+      font-size: clamp(22px, 2.6vw, 34px);
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .subtitle{
+      margin: 10px 0 0;
+      color:var(--muted);
+      max-width: 72ch;
+      font-size: 15px;
+    }
+    .pillrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color:var(--muted);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      white-space:nowrap;
+    }
+    main{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap:16px;
+      margin-top: 18px;
+    }
+    @media (max-width: 920px){
+      main{grid-template-columns:1fr}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px 18px 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    h2{
+      font-size:16px;
+      margin:0 0 10px;
+      letter-spacing:-0.01em;
+    }
+    h3{
+      font-size:14px;
+      margin: 14px 0 8px;
+      color:var(--text);
+      letter-spacing:-0.01em;
+    }
+    p{margin: 10px 0; color: var(--muted)}
+    ul{margin: 8px 0 0 18px; padding:0}
+    li{margin: 6px 0; color: var(--muted)}
+    .rules{
+      display:grid;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .rule{
+      display:flex;
+      gap:10px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background: rgba(0,0,0,0.18);
+    }
+    .badge{
+      flex:0 0 auto;
+      height:22px;
+      padding:0 10px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+    .badge.good{border-color: rgba(71,209,140,0.35); color: var(--good)}
+    .badge.warn{border-color: rgba(255,204,102,0.35); color: var(--warn)}
+    .badge.bad{border-color: rgba(255,107,107,0.35); color: var(--bad)}
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 8px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      white-space: nowrap;
+    }
+    table{
+      width:100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      overflow:hidden;
+      border-radius: 12px;
+      border:1px solid var(--line);
+    }
+    th, td{
+      padding:10px 10px;
+      border-bottom:1px solid var(--line);
+      font-size: 13px;
+      vertical-align: top;
+    }
+    th{
+      text-align:left;
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+      font-weight: 600;
+    }
+    tr:last-child td{border-bottom:none}
+    .muted{color:var(--muted)}
+    .accent{color:var(--accent)}
+    .callout{
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(122,162,255,0.35);
+      background: rgba(122,162,255,0.08);
+      color: var(--muted);
+      margin-top: 12px;
+    }
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 560px){
+      .twoCol{grid-template-columns:1fr}
+    }
+    footer{
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      opacity: 0.95;
+    }
+    .sectionTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 8px;
+    }
+    .small{
+      font-size:12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Piano Practice Algorithm <span class="accent">(28 bars)</span></h1>
+        <p class="subtitle">
+          Deterministic daily workflow for 2-bar chunking with backward chaining, spaced recall, and integration.
+          Optimize for retention and reliable transitions, not comfort.
+        </p>
+        <div class="pillrow">
+          <div class="pill">Chunk size: <span class="accent">2 bars</span></div>
+          <div class="pill">Total chunks: <span class="accent">14</span></div>
+          <div class="pill">Direction: <span class="accent">from end → start</span></div>
+          <div class="pill">Focus: <span class="accent">recall + binding</span></div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <div class="sectionTitle">
+          <h2>Core principles (non-negotiable)</h2>
+        </div>
+        <div class="rules">
+          <div class="rule">
+            <span class="badge good">1</span>
+            <div><strong>New material = massed practice.</strong> Today’s chunk gets the repetitions.</div>
+          </div>
+          <div class="rule">
+            <span class="badge warn">2</span>
+            <div><strong>Old material = spaced recall.</strong> Low-volume, high-signal retrieval prevents decay.</div>
+          </div>
+          <div class="rule">
+            <span class="badge good">3</span>
+            <div><strong>Integration is a separate task.</strong> Chunk mastery ≠ piece mastery.</div>
+          </div>
+          <div class="rule">
+            <span class="badge bad">4</span>
+            <div><strong>Recall failure triggers repair, not brute force.</strong> Fix the defect; stop once recall works.</div>
+          </div>
+        </div>
+
+        <h3>Chunk map (numbered from the end)</h3>
+        <p class="muted">Label chunks backward to match your workflow:</p>
+        <table aria-label="Chunk map">
+          <thead>
+            <tr>
+              <th>Chunk #</th>
+              <th>Bars</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td>27–28</td><td class="muted">End anchor (finish is always secure)</td></tr>
+            <tr><td><strong>2</strong></td><td>25–26</td><td class="muted">Add preceding link</td></tr>
+            <tr><td>…</td><td>…</td><td class="muted">Continue backward in 2-bar units</td></tr>
+            <tr><td><strong>14</strong></td><td>1–2</td><td class="muted">Opening chunk (learned last)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>Key threshold:</strong> after a chunk is “learned,” future work should prioritize
+          <span class="accent">retrieval</span> (recall) over additional mass repetition.
+        </div>
+
+        <h3>Daily practice template (baseline)</h3>
+        <div class="twoCol">
+          <div class="card" style="padding:14px;border-radius:14px;">
+            <div class="sectionTitle">
+              <h2 style="margin:0;font-size:14px;">Phase A — Recall (old material)</h2>
+              <span class="kbd">2–3 reps / chunk</span>
+            </div>
+            <ul>
+              <li>Play each previously learned chunk <strong>2–3 times</strong>.</li>
+              <li><strong>No warm-up</strong> for these; treat them as retrieval tests.</li>
+              <li>If clean → move on immediately.</li>
+              <li>If unstable → mark for Phase C.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="padding:14px;border-radius:14px;">
+            <div class="sectionTitle">
+              <h2 style="margin:0;font-size:14px;">Phase B — Acquisition (new chunk)</h2>
+              <span class="kbd">20–30 reps</span>
+            </div>
+            <ul>
+              <li>Today’s new 2 bars get <strong>20–30 focused repetitions</strong>.</li>
+              <li>Slow → accurate → stable (hands separate if needed).</li>
+              <li>Stop when attention drops; don’t grind past that point.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px;padding:14px;border-radius:14px;">
+          <div class="sectionTitle">
+            <h2 style="margin:0;font-size:14px;">Phase C — Repair (only if needed)</h2>
+            <span class="kbd">5–10 reps</span>
+          </div>
+          <ul>
+            <li>Only for chunks that failed during Phase A.</li>
+            <li>Do <strong>5–10</strong> targeted repetitions addressing the exact failure mode.</li>
+            <li>Exit as soon as recall succeeds once.</li>
+          </ul>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div class="sectionTitle">
+          <h2>Weekly macro-structure</h2>
+          <span class="small">This prevents “isolated chunks.”</span>
+        </div>
+
+        <h3>Every 2 days: adjacency binding</h3>
+        <p class="muted">After Phase B, practice transitions:</p>
+        <ul>
+          <li>Chunk 1 → 2, 2 → 3, … up to the newest chunk</li>
+          <li><strong>2–3 reps per pair</strong></li>
+          <li>No stopping between chunks</li>
+        </ul>
+
+        <h3>Every 4 days: chain expansion</h3>
+        <p class="muted">Replace adjacency binding with chained endings:</p>
+        <ul>
+          <li>Last 4 bars</li>
+          <li>Last 8 bars</li>
+          <li>Last 12 bars (as available)</li>
+        </ul>
+
+        <h3>Once per week: stress test</h3>
+        <ul>
+          <li>Full piece, <str
