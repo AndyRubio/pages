@@ -1,102 +1,117 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Piano Practice Algorithm (28 bars)</title>
+  <title>28-Bar Piano Practice Plan (2-bar chunks, backward chaining)</title>
   <style>
     :root{
       --bg:#0b0c10;
-      --card:#11131a;
-      --text:#e8e9ee;
-      --muted:#b7bccb;
-      --line:#242838;
+      --card:#121522;
+      --card2:#0f1220;
+      --text:#eceef5;
+      --muted:#b8bfd3;
+      --line:#262b3d;
       --accent:#7aa2ff;
       --good:#47d18c;
       --warn:#ffcc66;
       --bad:#ff6b6b;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 800px at 20% 0%, #121528 0%, var(--bg) 45%, #07080c 100%);
+      font-family:var(--sans);
+      background: radial-gradient(1200px 700px at 15% 0%, #171a33 0%, var(--bg) 50%, #07080c 100%);
       color:var(--text);
-      line-height:1.5;
+      line-height:1.55;
     }
     .wrap{
-      max-width: 980px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 32px 16px 56px;
+      padding: 28px 16px 56px;
     }
     header{
       display:flex;
       gap:16px;
-      align-items:flex-start;
       justify-content:space-between;
+      align-items:flex-start;
       flex-wrap:wrap;
-      margin-bottom:18px;
+      margin-bottom:16px;
     }
     h1{
-      font-size: clamp(22px, 2.6vw, 34px);
-      margin: 0;
-      letter-spacing: -0.02em;
+      margin:0;
+      font-size: clamp(22px, 2.8vw, 36px);
+      letter-spacing:-0.02em;
     }
-    .subtitle{
-      margin: 10px 0 0;
+    .sub{
+      margin:10px 0 0;
       color:var(--muted);
-      max-width: 72ch;
-      font-size: 15px;
+      max-width: 80ch;
+      font-size: 14px;
     }
-    .pillrow{
+    .pills{
       display:flex;
-      gap:10px;
       flex-wrap:wrap;
-      margin-top:10px;
+      gap:10px;
+      margin-top:12px;
     }
     .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
       border:1px solid var(--line);
       background: rgba(255,255,255,0.03);
       color:var(--muted);
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
       white-space:nowrap;
     }
-    main{
+    .accent{color:var(--accent)}
+    .grid{
       display:grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap:16px;
-      margin-top: 18px;
+      grid-template-columns: 1fr;
+      gap:14px;
+      margin-top:14px;
     }
-    @media (max-width: 920px){
-      main{grid-template-columns:1fr}
+    @media (min-width: 980px){
+      .grid{grid-template-columns: 0.9fr 1.1fr}
     }
     .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:18px 18px 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
     }
     h2{
-      font-size:16px;
       margin:0 0 10px;
+      font-size: 16px;
       letter-spacing:-0.01em;
     }
     h3{
-      font-size:14px;
-      margin: 14px 0 8px;
-      color:var(--text);
+      margin:14px 0 8px;
+      font-size: 14px;
+      color: var(--text);
       letter-spacing:-0.01em;
     }
-    p{margin: 10px 0; color: var(--muted)}
+    p{margin:10px 0; color:var(--muted)}
     ul{margin: 8px 0 0 18px; padding:0}
-    li{margin: 6px 0; color: var(--muted)}
+    li{margin: 6px 0; color:var(--muted)}
+    .kbd{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 8px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      white-space: nowrap;
+    }
     .rules{
       display:grid;
       gap:10px;
-      margin-top: 10px;
+      margin-top:10px;
     }
     .rule{
       display:flex;
@@ -122,202 +137,287 @@
     .badge.good{border-color: rgba(71,209,140,0.35); color: var(--good)}
     .badge.warn{border-color: rgba(255,204,102,0.35); color: var(--warn)}
     .badge.bad{border-color: rgba(255,107,107,0.35); color: var(--bad)}
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      padding: 2px 6px;
-      border-radius: 8px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      white-space: nowrap;
+    .callout{
+      margin-top:12px;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid rgba(122,162,255,0.35);
+      background: rgba(122,162,255,0.08);
+      color: var(--muted);
     }
     table{
       width:100%;
       border-collapse: collapse;
       margin-top: 10px;
-      overflow:hidden;
-      border-radius: 12px;
       border:1px solid var(--line);
+      border-radius: 12px;
+      overflow:hidden;
     }
     th, td{
-      padding:10px 10px;
-      border-bottom:1px solid var(--line);
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
       font-size: 13px;
       vertical-align: top;
     }
     th{
       text-align:left;
-      color: var(--text);
+      font-weight: 650;
       background: rgba(255,255,255,0.03);
-      font-weight: 600;
+      color: var(--text);
     }
     tr:last-child td{border-bottom:none}
+    .colDay{width: 84px}
     .muted{color:var(--muted)}
-    .accent{color:var(--accent)}
-    .callout{
-      padding:12px 12px;
-      border-radius:12px;
-      border:1px solid rgba(122,162,255,0.35);
-      background: rgba(122,162,255,0.08);
-      color: var(--muted);
-      margin-top: 12px;
-    }
-    .twoCol{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    @media (max-width: 560px){
-      .twoCol{grid-template-columns:1fr}
-    }
-    footer{
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 12px;
-      opacity: 0.95;
-    }
-    .sectionTitle{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom: 8px;
-    }
-    .small{
+    .sectionNote{
+      margin-top:10px;
       font-size:12px;
       color: var(--muted);
+      opacity:0.95;
+    }
+    .footer{
+      margin-top:14px;
+      font-size:12px;
+      color: var(--muted);
+      opacity:0.9;
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <header>
       <div>
-        <h1>Piano Practice Algorithm <span class="accent">(28 bars)</span></h1>
-        <p class="subtitle">
-          Deterministic daily workflow for 2-bar chunking with backward chaining, spaced recall, and integration.
-          Optimize for retention and reliable transitions, not comfort.
+        <h1>28-Bar Piano Practice Plan <span class="accent">(2-bar chunks, backward chaining)</span></h1>
+        <p class="sub">
+          Fully specified day-by-day plan for learning the entire piece in 14 days, then consolidating.
+          Chunk numbering is from the end: Chunk 1 = bars 27–28 … Chunk 14 = bars 1–2.
         </p>
-        <div class="pillrow">
+        <div class="pills">
           <div class="pill">Chunk size: <span class="accent">2 bars</span></div>
           <div class="pill">Total chunks: <span class="accent">14</span></div>
-          <div class="pill">Direction: <span class="accent">from end → start</span></div>
-          <div class="pill">Focus: <span class="accent">recall + binding</span></div>
+          <div class="pill">New chunks/day: <span class="accent">1</span></div>
+          <div class="pill">Recall: <span class="accent">mandatory</span></div>
+          <div class="pill">Binding: <span class="accent">mandatory</span></div>
         </div>
       </div>
     </header>
 
-    <main>
+    <div class="grid">
       <section class="card">
-        <div class="sectionTitle">
-          <h2>Core principles (non-negotiable)</h2>
-        </div>
+        <h2>Daily structure (same order every day)</h2>
         <div class="rules">
           <div class="rule">
             <span class="badge good">1</span>
-            <div><strong>New material = massed practice.</strong> Today’s chunk gets the repetitions.</div>
+            <div><strong>Recall phase</strong> — all previously learned chunks (<span class="kbd">2–3 reps each</span>).</div>
           </div>
           <div class="rule">
-            <span class="badge warn">2</span>
-            <div><strong>Old material = spaced recall.</strong> Low-volume, high-signal retrieval prevents decay.</div>
+            <span class="badge good">2</span>
+            <div><strong>Acquisition phase</strong> — today’s new chunk (<span class="kbd">25 reps</span>; Day 1: <span class="kbd">25–30</span>).</div>
           </div>
           <div class="rule">
-            <span class="badge good">3</span>
-            <div><strong>Integration is a separate task.</strong> Chunk mastery ≠ piece mastery.</div>
+            <span class="badge warn">3</span>
+            <div><strong>Repair phase</strong> — only if recall failed (<span class="kbd">5–10 reps</span> targeted; stop once recall works).</div>
           </div>
           <div class="rule">
             <span class="badge bad">4</span>
-            <div><strong>Recall failure triggers repair, not brute force.</strong> Fix the defect; stop once recall works.</div>
+            <div><strong>Binding phase</strong> — connect chunks exactly as listed for the day.</div>
           </div>
         </div>
-
-        <h3>Chunk map (numbered from the end)</h3>
-        <p class="muted">Label chunks backward to match your workflow:</p>
-        <table aria-label="Chunk map">
-          <thead>
-            <tr>
-              <th>Chunk #</th>
-              <th>Bars</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>1</strong></td><td>27–28</td><td class="muted">End anchor (finish is always secure)</td></tr>
-            <tr><td><strong>2</strong></td><td>25–26</td><td class="muted">Add preceding link</td></tr>
-            <tr><td>…</td><td>…</td><td class="muted">Continue backward in 2-bar units</td></tr>
-            <tr><td><strong>14</strong></td><td>1–2</td><td class="muted">Opening chunk (learned last)</td></tr>
-          </tbody>
-        </table>
 
         <div class="callout">
-          <strong>Key threshold:</strong> after a chunk is “learned,” future work should prioritize
-          <span class="accent">retrieval</span> (recall) over additional mass repetition.
-        </div>
-
-        <h3>Daily practice template (baseline)</h3>
-        <div class="twoCol">
-          <div class="card" style="padding:14px;border-radius:14px;">
-            <div class="sectionTitle">
-              <h2 style="margin:0;font-size:14px;">Phase A — Recall (old material)</h2>
-              <span class="kbd">2–3 reps / chunk</span>
-            </div>
-            <ul>
-              <li>Play each previously learned chunk <strong>2–3 times</strong>.</li>
-              <li><strong>No warm-up</strong> for these; treat them as retrieval tests.</li>
-              <li>If clean → move on immediately.</li>
-              <li>If unstable → mark for Phase C.</li>
-            </ul>
-          </div>
-
-          <div class="card" style="padding:14px;border-radius:14px;">
-            <div class="sectionTitle">
-              <h2 style="margin:0;font-size:14px;">Phase B — Acquisition (new chunk)</h2>
-              <span class="kbd">20–30 reps</span>
-            </div>
-            <ul>
-              <li>Today’s new 2 bars get <strong>20–30 focused repetitions</strong>.</li>
-              <li>Slow → accurate → stable (hands separate if needed).</li>
-              <li>Stop when attention drops; don’t grind past that point.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:12px;padding:14px;border-radius:14px;">
-          <div class="sectionTitle">
-            <h2 style="margin:0;font-size:14px;">Phase C — Repair (only if needed)</h2>
-            <span class="kbd">5–10 reps</span>
-          </div>
+          <strong>Chunk map:</strong>
           <ul>
-            <li>Only for chunks that failed during Phase A.</li>
-            <li>Do <strong>5–10</strong> targeted repetitions addressing the exact failure mode.</li>
-            <li>Exit as soon as recall succeeds once.</li>
+            <li>Chunk 1 = bars 27–28</li>
+            <li>Chunk 2 = bars 25–26</li>
+            <li>…</li>
+            <li>Chunk 14 = bars 1–2</li>
           </ul>
+        </div>
+
+        <h3>Non-negotiable rules</h3>
+        <ul>
+          <li>If recall fails → repair immediately (do not “save it for later”).</li>
+          <li>Never skip recall to “save time.”</li>
+          <li>Do not increase reps just because you feel uncertain; fix the defect instead.</li>
+          <li>Continuity training (chains/runs) is diagnostic; do not stop during those runs.</li>
+        </ul>
+
+        <div class="footer">
+          Implementation detail: during Recall, play at a tempo that allows correctness without hesitating. If it collapses, mark that chunk for Repair.
         </div>
       </section>
 
-      <aside class="card">
-        <div class="sectionTitle">
-          <h2>Weekly macro-structure</h2>
-          <span class="small">This prevents “isolated chunks.”</span>
+      <section class="card">
+        <h2>Day-by-day plan (Days 1–14)</h2>
+        <table aria-label="Day-by-day practice plan">
+          <thead>
+            <tr>
+              <th class="colDay">Day</th>
+              <th>Exactly what happens</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Day 1</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 1 (bars 27–28)<br/>
+                Chunk 1 × <span class="kbd">25–30</span><br/>
+                No recall. No binding.
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 2</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 2 (bars 25–26)<br/>
+                Recall: Chunk 1 × <span class="kbd">3</span><br/>
+                Chunk 2 × <span class="kbd">25</span><br/>
+                Bind: 2 → 1 × <span class="kbd">3</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 3</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 3 (bars 23–24)<br/>
+                Recall: Chunks 1–2 × <span class="kbd">3 each</span><br/>
+                Chunk 3 × <span class="kbd">25</span><br/>
+                Bind: 3 → 2 × <span class="kbd">3</span>; 2 → 1 × <span class="kbd">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 4</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 4 (bars 21–22)<br/>
+                Recall: Chunks 1–3 × <span class="kbd">2–3 each</span><br/>
+                Chunk 4 × <span class="kbd">25</span><br/>
+                Bind: 4 → 3 × <span class="kbd">3</span>; 3 → 2 × <span class="kbd">2</span><br/>
+                <strong>Chain expansion:</strong> Bars 21–28 (chunks 4→1) × <span class="kbd">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 5</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 5 (bars 19–20)<br/>
+                Recall: Chunks 1–4 × <span class="kbd">2 each</span><br/>
+                Chunk 5 × <span class="kbd">25</span><br/>
+                Bind: 5 → 4 × <span class="kbd">3</span>; 4 → 3 × <span class="kbd">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 6</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 6 (bars 17–18)<br/>
+                Recall: Chunks 1–5 × <span class="kbd">2 each</span><br/>
+                Chunk 6 × <span class="kbd">25</span><br/>
+                Bind: 6 → 5 × <span class="kbd">3</span>; 5 → 4 × <span class="kbd">2</span><br/>
+                <strong>Chain expansion:</strong> Bars 17–28 (chunks 6→1) × <span class="kbd">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 7</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 7 (bars 15–16)<br/>
+                Recall: Chunks 1–6 × <span class="kbd">2 each</span><br/>
+                Chunk 7 × <span class="kbd">25</span><br/>
+                Bind: 7 → 6 × <span class="kbd">3</span>; 6 → 5 × <span class="kbd">2</span><br/>
+                <strong>Stress test:</strong> Bars 15–28 (chunks 7→1) × <span class="kbd">1 run</span>, no stopping
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 8</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 8 (bars 13–14)<br/>
+                Recall: Chunks 1–7 × <span class="kbd">2 each</span><br/>
+                Chunk 8 × <span class="kbd">25</span><br/>
+                Bind: 8 → 7 × <span class="kbd">3</span>; 7 → 6 × <span class="kbd">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 9</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 9 (bars 11–12)<br/>
+                Recall: Chunks 1–8 × <span class="kbd">2 each</span><br/>
+                Chunk 9 × <span class="kbd">25</span><br/>
+                Bind: 9 → 8 × <span class="kbd">3</span>; 8 → 7 × <span class="kbd">2</span><br/>
+                <strong>Chain expansion:</strong> Bars 11–28 (chunks 9→1) × <span class="kbd">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 10</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 10 (bars 9–10)<br/>
+                Recall: Chunks 1–9 × <span class="kbd">2 each</span><br/>
+                Chunk 10 × <span class="kbd">25</span><br/>
+                Bind: 10 → 9 × <span class="kbd">3</span>; 9 → 8 × <span class="kbd">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 11</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 11 (bars 7–8)<br/>
+                Recall: Chunks 1–10 × <span class="kbd">2 each</span><br/>
+                Chunk 11 × <span class="kbd">25</span><br/>
+                Bind: 11 → 10 × <span class="kbd">3</span>; 10 → 9 × <span class="kbd">2</span><br/>
+                <strong>Chain expansion:</strong> Bars 7–28 (chunks 11→1) × <span class="kbd">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 12</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 12 (bars 5–6)<br/>
+                Recall: Chunks 1–11 × <span class="kbd">2 each</span><br/>
+                Chunk 12 × <span class="kbd">25</span><br/>
+                Bind: 12 → 11 × <span class="kbd">3</span>; 11 → 10 × <span class="kbd">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 13</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 13 (bars 3–4)<br/>
+                Recall: Chunks 1–12 × <span class="kbd">2 each</span><br/>
+                Chunk 13 × <span class="kbd">25</span><br/>
+                Bind: 13 → 12 × <span class="kbd">3</span>; 12 → 11 × <span class="kbd">2</span><br/>
+                <strong>Full backward chain:</strong> Bars 3–28 (chunks 13→1) × <span class="kbd">2</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td><strong>Day 14</strong></td>
+              <td>
+                <strong>New:</strong> Chunk 14 (bars 1–2)<br/>
+                Recall: Chunks 1–13 × <span class="kbd">2 each</span><br/>
+                Chunk 14 × <span class="kbd">25</span><br/>
+                Bind: 14 → 13 × <span class="kbd">3</span>; 13 → 12 × <span class="kbd">2</span><br/>
+                <strong>Full piece:</strong> Bars 1–28 × <span class="kbd">2 runs</span>, no stopping, tempo irrelevant
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>After Day 14: consolidation phase</h3>
+        <ul>
+          <li>Full piece × <span class="kbd">1–2 runs daily</span> (no stopping).</li>
+          <li>Any failed transition: isolate that junction × <span class="kbd">5</span> targeted reps, then re-run the chain that contains it.</li>
+          <li>Tempo work starts only after the piece survives daily full runs.</li>
+        </ul>
+
+        <div class="sectionNote">
+          Note: “Repair phase” is condition-based. If nothing fails in recall, you do no repair that day.
         </div>
-
-        <h3>Every 2 days: adjacency binding</h3>
-        <p class="muted">After Phase B, practice transitions:</p>
-        <ul>
-          <li>Chunk 1 → 2, 2 → 3, … up to the newest chunk</li>
-          <li><strong>2–3 reps per pair</strong></li>
-          <li>No stopping between chunks</li>
-        </ul>
-
-        <h3>Every 4 days: chain expansion</h3>
-        <p class="muted">Replace adjacency binding with chained endings:</p>
-        <ul>
-          <li>Last 4 bars</li>
-          <li>Last 8 bars</li>
-          <li>Last 12 bars (as available)</li>
-        </ul>
-
-        <h3>Once per week: stress test</h3>
-        <ul>
-          <li>Full piece, <str
+      </section>
+    </div>
+  </div>
+</body>
+</html>
+```
