@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Beginner Gym Resistance Training Plan (Age 63+)</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#111a2e;
+      --text:#e8eefc;
+      --muted:#b7c3e6;
+      --accent:#7aa2ff;
+      --accent2:#5eead4;
+      --border:rgba(232,238,252,.12);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --max: 980px;
+    }
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(122,162,255,.18), transparent 50%),
+                  radial-gradient(900px 600px at 90% 20%, rgba(94,234,212,.12), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 18px 80px;
+    }
+    header{
+      padding:22px 18px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(17,26,46,.95), rgba(17,26,46,.65));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(24px, 3vw, 34px);
+      letter-spacing:.2px;
+    }
+    .subtitle{margin:0; color:var(--muted)}
+    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .pill{
+      font-size:13px;
+      color:var(--muted);
+      border:1px solid var(--border);
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(232,238,252,.04);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+      margin-top:18px;
+    }
+    @media (min-width: 880px){
+      .grid{ grid-template-columns: 1.1fr .9fr; align-items:start; }
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background: rgba(17,26,46,.70);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    h2{
+      margin:0 0 10px;
+      font-size:20px;
+    }
+    h3{
+      margin:18px 0 8px;
+      font-size:16px;
+      color:var(--text);
+    }
+    p{margin:10px 0}
+    ul{margin:8px 0 0 18px; padding:0}
+    li{margin:6px 0; color:var(--muted)}
+    li strong{color:var(--text)}
+    .note{
+      border-left:3px solid var(--accent2);
+      padding:10px 12px;
+      background: rgba(94,234,212,.06);
+      border-radius:12px;
+      color:var(--muted);
+      margin-top:12px;
+    }
+
+    .workout{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      margin-top:12px;
+    }
+    .block{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      background: rgba(232,238,252,.03);
+    }
+    .block h3{margin:0 0 8px}
+    .ex{
+      margin:10px 0 0;
+      border-top:1px dashed rgba(232,238,252,.16);
+      padding-top:10px;
+    }
+    .ex .name{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:baseline;
+      margin:0;
+    }
+    .tag{
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(232,238,252,.14);
+      background: rgba(232,238,252,.04);
+      padding:3px 8px;
+      border-radius:999px;
+    }
+    .rx{
+      margin:6px 0 0;
+      color:var(--muted);
+    }
+    .rx strong{color:var(--text)}
+    .links{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:10px
+    }
+    .btn{
+      display:inline-block;
+      border:1px solid var(--border);
+      padding:10px 12px;
+      border-radius:12px;
+      background: rgba(122,162,255,.10);
+      color:var(--text);
+      font-size:14px;
+    }
+    .btn:hover{background: rgba(122,162,255,.16); text-decoration:none}
+    .warn{
+      border-left:3px solid #ff6b6b;
+      padding:10px 12px;
+      background: rgba(255,107,107,.06);
+      border-radius:12px;
+      color:var(--muted);
+      margin-top:10px;
+    }
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+      margin-top:8px;
+    }
+    @media (min-width: 720px){
+      .twoCol{grid-template-columns: 1fr 1fr;}
+    }
+    .footer{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:13px;
+      opacity:.95;
+    }
+    .kbd{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:2px 6px;
+      border:1px solid rgba(232,238,252,.14);
+      border-bottom-color: rgba(232,238,252,.22);
+      border-radius:6px;
+      background: rgba(232,238,252,.03);
+      color:var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Gym Resistance Training Plan</h1>
+      <p class="subtitle">Goal: build strength and function safely with progressive, joint-friendly training.</p>
+      <div class="pillrow">
+        <span class="pill">2–3 sessions/week</span>
+        <span class="pill">Full-body sessions</span>
+        <span class="pill">Machines first</span>
+        <span class="pill">Stop 2–3 reps before failure</span>
+        <span class="pill">Progress slowly</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Core Principles</h2>
+        <ul>
+          <li><strong>Frequency beats intensity:</strong> 2–3 sessions/week; avoid training the same muscles hard on consecutive days.</li>
+          <li><strong>Machines &gt; free weights (initially):</strong> lower balance demand; easier setup; lower injury risk.</li>
+          <li><strong>Controlled reps:</strong> ~2–3 seconds up, ~3 seconds down; avoid momentum.</li>
+          <li><strong>Leave reps in reserve:</strong> stop with ~2–3 reps “left in the tank”.</li>
+          <li><strong>Progress gradually:</strong> add weight <em>or</em> reps (not both at once).</li>
+        </ul>
+
+        <div class="twoCol">
+          <div class="block">
+            <h3>Weekly Structure</h3>
+            <ul>
+              <li><strong>Option A (start here):</strong> 2 full-body sessions/week (e.g., Mon & Thu)</li>
+              <li><strong>Option B (after 6–8 weeks):</strong> 3 full-body sessions/week (e.g., Mon/Wed/Fri)</li>
+              <li>Session length: ~45–60 minutes</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h3>Progression Rules</h3>
+            <ul>
+              <li>Start lighter than you think.</li>
+              <li>When you hit the <strong>top of the rep range</strong> on all sets, increase weight next time.</li>
+              <li>Typical jump on machines: <strong>2.5–5 lb (1–2 kg)</strong>.</li>
+            </ul>
+            <div class="note">
+              Track sets/reps/weight each session. Consistency + small increases drive results.
+            </div>
+          </div>
+        </div>
+
+        <div class="warn">
+          <strong>Red flags (stop/modify):</strong> sharp joint pain, dizziness, chest discomfort, or pain lasting &gt;48 hours after training.
+        </div>
+      </section>
+
+      <aside class="card">
+        <h2>External Resources (exercise demos)</h2>
+        <p style="color:var(--muted); margin-top:0">
+          Use these links to confirm setup and technique. Prefer videos that match the exact machine in your gym.
+        </p>
+        <div class="links">
+          <a class="btn" href="https://www.exrx.net/" target="_blank" rel="noopener">ExRx Exercise Library</a>
+          <a class="btn" href="https://www.nhs.uk/live-well/exercise/" target="_blank" rel="noopener">NHS: Exercise guidance</a>
+          <a class="btn" href="https://www.acsm.org/" target="_blank" rel="noopener">ACSM (fitness standards)</a>
+        </div>
+        <p class="footer">
+          Tip: If a machine label includes a brand/model, search it directly (e.g., <span class="kbd">Brand Model chest press setup</span>).
+        </p>
+      </aside>
+    </div>
+
+    <section class="card" style="margin-top:16px">
+      <h2>Session Template (Full-Body)</h2>
+
+      <div class="block">
+        <h3>Warm-Up (10 minutes)</h3>
+        <ol style="margin:8px 0 0 18px; color:var(--muted)">
+          <li>5 minutes light cardio (treadmill walk, bike, or elliptical)</li>
+          <li>Dynamic prep: arm circles × 10, hip circles × 10, sit-to-stand × 10, shoulder shrugs × 10</li>
+        </ol>
+        <div class="note">Avoid long static stretching before lifting. Keep everything pain-free.</div>
+      </div>
+
+      <div class="workout">
+        <div class="block">
+          <h3>Lower Body (priority: mobility + strength)</h3>
+
+          <div class="ex">
+            <p class="name"><strong>1) Leg Press (machine)</strong> <span class="tag">2–3 sets × 8–12 reps</span></p>
+            <p class="rx"><strong>Cue:</strong> feet shoulder-width; knees track over toes; controlled depth.</p>
+          </div>
+
+          <div class="ex">
+            <p class="name"><strong>2) Seated Leg Curl</strong> <span class="tag">2 sets × 10–12 reps</span></p>
+            <p class="rx"><strong>Cue:</strong> smooth reps; no hip lifting off the pad.</p>
+          </div>
+
+          <div class="ex">
+            <p class="name"><strong>3) Leg Extension (light)</strong> <span class="tag">1–2 sets × 10–12 reps</span></p>
+            <p class="rx"><strong>Cue:</strong> stop if knee pain; keep range comfortable.</p>
+          </div>
+
+          <div class="ex">
+            <p class="name"><strong>4) Calf Raise (machine or bodyweight)</strong> <span class="tag">2 sets × 12–15 reps</span></p>
+            <p class="rx"><strong>Cue:</strong> full control; pause briefly at the top.</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <h3>Upper Body Push (chest, shoulders, triceps)</h3>
+
+          <div class="ex">
+            <p class="name"><strong>5) Chest Press (machine)</strong> <span class="tag">2–3 sets × 8–12 reps</span></p>
+            <p class="rx"><strong>Cue:</strong> seat height so handles align mid-chest; keep shoulders down/back.</p>
+          </div>
+
+          <div class="ex">
+            <p class="name"><strong>6) Shoulder Press (machine)</strong> <span class="tag">2 sets × 8–10 reps</span></p>
+            <p class="rx"><strong>Cue:</strong> pain-free range only; avoid shrugging.</p>
+          </div>
+
+          <div class="ex">
+            <p class="name"><strong>7) Triceps Pushdown (cable)</strong> <span class="tag">2 sets × 10–12 reps</span></p>
+            <p class="rx"><strong>Cue:</strong> elbows stay near ribs; no swinging.</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <h3>Upper Body Pull (back, biceps, posture)</h3>
+
+          <div class="ex">
+            <p class="name"><strong>8) Lat Pulldown</strong> <span class="tag">2–3 sets × 8–12 reps</span></p>
+            <p class="rx"><strong>Cue:</strong> pull to upper chest; do not pull behind the neck.</p>
+          </div>
+
+          <div class="ex">
+            <p class="name"><strong>9) Seated Row</strong> <span class="tag">2 sets × 10–12 reps</span></p>
+            <p class="rx"><strong>Cue:</strong> squeeze shoulder blades together; keep ribs down.</p>
+          </div>
+
+          <div class="ex">
+            <p class="name"><strong>10) Biceps Curl (machine or cable)</strong> <span class="tag">1–2 sets × 10–12 reps</span></p>
+            <p class="rx"><strong>Cue:</strong> slow reps; no shoulder rocking.</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <h3>Core (stability, not sit-ups)</h3>
+
+          <div class="ex">
+            <p class="name"><strong>11) Plank (elevated if needed)</strong> <span class="tag">2 × 20–40 seconds</span></p>
+            <p class="rx"><strong>Cue:</strong> neutral spine; stop before form breaks.</p>
+          </div>
+
+          <div class="ex">
+            <p class="name"><strong>OR: Dead Bug / Pallof Press</strong> <span class="tag">2 sets × 8–10 per side</span></p>
+            <p class="rx"><strong>Cue:</strong> brace gently; no lower-back arching.</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <h3>Cool-Down (5 minutes)</h3>
+          <ul>
+            <li>Easy walking</li>
+            <li>Gentle stretching for hips, chest, and back</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block" style="margin-top:14px">
+        <h3>What to Avoid Initially</h3>
+        <ul>
+          <li>Heavy barbell squats or deadlifts</li>
+          <li>High-impact plyometrics</li>
+          <li>Training to failure</li>
+          <li>“Push through sharp pain” approaches</li>
+        </ul>
+      </div>
+
+      <div class="block" style="margin-top:14px">
+        <h3>Expected Outcomes (if consistent)</h3>
+        <ul>
+          <li><strong>4–6 weeks:</strong> better balance, easier daily movement, reduced stiffness</li>
+          <li><strong>3–6 months:</strong> noticeable strength gains, better posture, improved muscle preservation, reduced fall risk</li>
+        </ul>
+      </div>
+
+      <p class="footer">
+        Practical rule: if you’re unsure about a machine setup, ask gym staff for a 60-second walkthrough before loading it.
+      </p>
+    </section>
+  </div>
+</body>
+</html>
