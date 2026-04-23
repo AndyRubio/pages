@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7-Day DAW Perfectionism Reset</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --panel-2: #1e2430;
+      --text: #e9eef7;
+      --muted: #a7b1c2;
+      --accent: #7cc4ff;
+      --accent-2: #9cffc7;
+      --border: #2c3444;
+      --shadow: rgba(0, 0, 0, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #0f1115 0%, #131722 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1c2330 0%, #121720 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 16px 40px var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      grid-column: span 12;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 26px var(--shadow);
+    }
+
+    .rules, .notes {
+      background: var(--panel-2);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.35rem;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+
+    p { margin: 0 0 12px; }
+
+    ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+
+    li { margin-bottom: 8px; }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(124, 196, 255, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(124, 196, 255, 0.28);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .day {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 26px var(--shadow);
+    }
+
+    .day.full {
+      grid-column: 1 / -1;
+    }
+
+    .day-number {
+      color: var(--accent-2);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 0.88rem;
+      margin-bottom: 6px;
+    }
+
+    .time {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .footer {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .checklist {
+      columns: 2;
+      column-gap: 28px;
+    }
+
+    @media (max-width: 760px) {
+      .days { grid-template-columns: 1fr; }
+      .checklist { columns: 1; }
+      h1 { font-size: 1.7rem; }
+      .wrap { padding: 24px 14px 40px; }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        color: #111111;
+      }
+      .hero, .card, .day {
+        box-shadow: none;
+        background: #ffffff;
+        border-color: #cfcfcf;
+      }
+      .subtitle, .time, .footer, .pill, .day-number {
+        color: #333333;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="pill">7-Day DAW Perfectionism Reset</div>
+      <h1>Finish First. Judge Later.</h1>
+      <p class="subtitle">
+        This schedule is built to break the loop of <em>"I might make something bad, so I won’t start."</em>
+        It is not optimized for making brilliant music immediately. It is optimized for creating consistent finished output,
+        which is the condition required for improvement.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card rules">
+        <h2>Core Rules</h2>
+        <ul class="checklist">
+          <li>Each session is 30–45 minutes maximum.</li>
+          <li>Do not go over time.</li>
+          <li>Do not revisit old projects during creation sessions.</li>
+          <li>Export something every day, even if it sounds bad.</li>
+          <li>Name files numerically: <strong>Track_01, Track_02</strong>, etc.</li>
+          <li>No detailed mixing during sketch days.</li>
+          <li>Creation and evaluation happen in separate sessions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="days">
+      <article class="day">
+        <div class="day-number">Day 1</div>
+        <h3>Quantity over everything</h3>
+        <div class="time">30–45 minutes</div>
+        <p><strong>Goal:</strong> break the belief that a session must produce something good.</p>
+        <p><strong>Task:</strong> Create 2 sketches.</p>
+        <ul>
+          <li>5 min: drums</li>
+          <li>5 min: bass</li>
+          <li>5 min: melody or chords</li>
+          <li>5 min: arrange into a 16–32 bar loop</li>
+        </ul>
+        <p>Export both. No polishing.</p>
+      </article>
+
+      <article class="day">
+        <div class="day-number">Day 2</div>
+        <h3>Repeat under constraint</h3>
+        <div class="time">30–45 minutes</div>
+        <p><strong>Goal:</strong> make completion feel normal rather than dramatic.</p>
+        <p><strong>Task:</strong> Create 2 more sketches with strict limits.</p>
+        <ul>
+          <li>Use one drum kit only</li>
+          <li>Use one synth only</li>
+          <li>Choose one BPM and stick with it</li>
+        </ul>
+        <p>Export both. Do not judge quality.</p>
+      </article>
+
+      <article class="day">
+        <div class="day-number">Day 3</div>
+        <h3>Push through the “this is trash” point</h3>
+        <div class="time">30–45 minutes</div>
+        <p><strong>Goal:</strong> build tolerance for imperfect output.</p>
+        <p><strong>Task:</strong> Create 2 more sketches using the same 20-minute structure.</p>
+        <ul>
+          <li>Do not browse sounds endlessly</li>
+          <li>Do not tweak a single element for more than 60 seconds</li>
+          <li>Finish both and export both</li>
+        </ul>
+        <p>By the end of Day 3, you should have <strong>6 finished sketches</strong>.</p>
+      </article>
+
+      <article class="day">
+        <div class="day-number">Day 4</div>
+        <h3>Add simple arrangement</h3>
+        <div class="time">30–45 minutes</div>
+        <p><strong>Goal:</strong> move beyond loops without triggering perfectionism.</p>
+        <p><strong>Task:</strong> Create 1 longer sketch.</p>
+        <ul>
+          <li>10 min: build the core loop</li>
+          <li>10 min: duplicate into intro / main / breakdown</li>
+          <li>10–15 min: create variation by muting or removing parts</li>
+        </ul>
+        <p>Export once the structure exists.</p>
+      </article>
+
+      <article class="day">
+        <div class="day-number">Day 5</div>
+        <h3>Repeat basic song structure</h3>
+        <div class="time">30–45 minutes</div>
+        <p><strong>Goal:</strong> reinforce that arrangement is a process, not a performance test.</p>
+        <p><strong>Task:</strong> Create 1 longer sketch with the same structure as Day 4.</p>
+        <ul>
+          <li>Keep moving</li>
+          <li>No detailed mix work</li>
+          <li>If stuck, remove options rather than search for better ones</li>
+        </ul>
+        <p>Export at the end. You now have <strong>8 total sketches</strong>.</p>
+      </article>
+
+      <article class="day">
+        <div class="day-number">Day 6</div>
+        <h3>Evaluate later, not during creation</h3>
+        <div class="time">30–45 minutes</div>
+        <p><strong>Goal:</strong> teach your brain that judgment has its own separate phase.</p>
+        <ul>
+          <li>Listen to all 8 sketches without editing at first</li>
+          <li>Pick the 2 least bad, not the “best”</li>
+          <li>Spend 30 minutes improving only 1 of them</li>
+          <li>Adjust levels, tighten arrangement, maybe swap one sound</li>
+        </ul>
+        <p>Export a new version.</p>
+      </article>
+
+      <article class="day full">
+        <div class="day-number">Day 7</div>
+        <h3>Finish something</h3>
+        <div class="time">30–45 minutes</div>
+        <p><strong>Goal:</strong> make completion feel routine.</p>
+        <ul>
+          <li>Take the improved track from Day 6</li>
+          <li>Add a simple intro and outro</li>
+          <li>Balance levels roughly</li>
+          <li>Export a “final” version</li>
+        </ul>
+        <p>
+          The point is not perfection. The point is to prove that you can move from blank project to finished file
+          without waiting for certainty.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid" style="margin-top: 18px;">
+      <div class="card notes">
+        <h2>What this changes</h2>
+        <ul>
+          <li>Removes open-ended time, which is where perfectionism expands.</li>
+          <li>Shifts your focus from quality anxiety to repeated finished attempts.</li>
+          <li>Separates creating from judging, which stops self-interruption.</li>
+          <li>Builds evidence that bad output is survivable and useful.</li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="footer">Use the schedule as written once before modifying it. The structure matters more than inspiration.</p>
+  </div>
+</body>
+</html>
