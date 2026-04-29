@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UDO Super Gemini / Super 8 Sequencer Training Manual</title>
+<style>
+:root{--bg:#0d0f12;--panel:#161a20;--panel2:#1f252e;--text:#eef2f5;--muted:#aeb7c2;--accent:#88d8ff;--accent2:#ffd166;--ok:#9ae6b4;--warn:#fbbf24;--line:#333b46;--code:#0b0d10}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at top left,#1e2a34 0,#0d0f12 35%,#08090b 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}.wrap{max-width:1180px;margin:auto;padding:28px}.hero{padding:56px 28px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(136,216,255,.16),rgba(255,209,102,.09)),var(--panel);box-shadow:0 24px 70px rgba(0,0,0,.35)}h1{font-size:clamp(2.1rem,5vw,4.5rem);line-height:1;margin:0 0 14px}h2{font-size:2rem;margin:46px 0 14px;border-top:1px solid var(--line);padding-top:28px}h3{font-size:1.35rem;margin:28px 0 10px;color:var(--accent)}h4{margin:22px 0 8px;color:var(--accent2)}p{margin:10px 0;color:#d7dee6}.subtitle{font-size:1.15rem;color:var(--muted);max-width:850px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.card{background:rgba(22,26,32,.88);border:1px solid var(--line);border-radius:20px;padding:20px}.toc a{display:block;color:var(--text);text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}.toc a:hover{color:var(--accent)}.callout{border-left:5px solid var(--accent);background:rgba(136,216,255,.08);padding:14px 18px;border-radius:12px;margin:18px 0}.warning{border-left-color:var(--warn);background:rgba(251,191,36,.08)}.success{border-left-color:var(--ok);background:rgba(154,230,180,.08)}.step{counter-increment:step;background:var(--panel);border:1px solid var(--line);border-radius:18px;margin:14px 0;padding:18px 18px 18px 64px;position:relative}.step:before{content:counter(step);position:absolute;left:18px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#061018;display:grid;place-items:center;font-weight:800}section{counter-reset:step}kbd,.button{display:inline-block;padding:2px 7px;border:1px solid #5a6572;border-bottom-width:3px;background:#10141a;border-radius:7px;color:#fff;font-weight:700;font-size:.9em}table{width:100%;border-collapse:collapse;margin:16px 0;background:var(--panel);border-radius:16px;overflow:hidden}th,td{border-bottom:1px solid var(--line);padding:12px;vertical-align:top}th{text-align:left;background:var(--panel2);color:var(--accent)}code{background:var(--code);padding:2px 6px;border-radius:6px}.sequence{display:grid;grid-template-columns:repeat(16,1fr);gap:6px;margin:14px 0}.sq{aspect-ratio:1;border:1px solid #55606d;border-radius:8px;display:grid;place-items:center;color:var(--muted);font-size:.78rem;background:#10141a}.sq.on{background:rgba(136,216,255,.25);border-color:var(--accent);color:#fff}.sq.accent{box-shadow:0 0 0 2px var(--accent2) inset}.sq.rest{opacity:.25}.practice{border:1px dashed #6b7280;padding:18px;border-radius:18px;margin:18px 0;background:rgba(255,255,255,.035)}.badge{display:inline-block;color:#061018;background:var(--accent2);border-radius:999px;padding:4px 10px;font-weight:800;font-size:.78rem;margin-right:6px}.small{font-size:.92rem;color:var(--muted)}.footer{margin-top:60px;color:var(--muted);font-size:.9rem}.print-note{display:none}@media print{body{background:white;color:#111}.wrap{max-width:none}.hero,.card,.step,table{box-shadow:none;background:white;color:#111}.toc{display:none}.print-note{display:block}.button,kbd{color:#111;background:#eee}p{color:#111}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<p class="badge">Training Manual</p>
+<h1>Sequencer Mastery for the UDO Super Gemini / Super 8</h1>
+<p class="subtitle">A stepwise path from first principles to advanced two-layer sequencing: simple one-step ideas, 16-step patterns, 64-step architecture, rests, accents, slides, length control, memory management, transposition, clocking, and running one sequencer per layer at the same time.</p>
+</header>
+
+<div class="grid" style="margin-top:20px">
+<div class="card toc"><h3>Contents</h3><a href="#mental-model">1. Mental model</a><a href="#setup">2. Setup and safety checks</a><a href="#first-sequence">3. First sequence</a><a href="#editing">4. Editing steps</a><a href="#length">5. Length and pages</a><a href="#rests-accents-slides">6. Rests, accents, slides</a><a href="#clock">7. Clock and timing</a><a href="#performance">8. Performance control</a><a href="#memory">9. Load, store, clear</a><a href="#layers">10. Two-layer sequencing</a><a href="#expert">11. Expert drills</a><a href="#cheatsheet">12. Cheat sheet</a></div>
+<div class="card"><h3>Core facts</h3><p>The sequencer records up to <strong>64 steps</strong>. The 16 select buttons are the visible grid; <kbd>RANGE</kbd> changes which page of 16 steps you are viewing.</p><p>Each layer has its own patch-related arpeggiator/sequencer settings. For deep work, always confirm whether <kbd>UPPER</kbd> or <kbd>LOWER</kbd> is selected before editing.</p></div>
+</div>
+
+<section id="mental-model"><h2>1. Mental model: what the sequencer really is</h2>
+<p>A sequencer is not a recording of your live performance in continuous time. It is a grid of decisions. Each step can hold a note or chord, and additional tracks decide whether the step plays normally, is skipped, is accented, is tied/slid, or marks the end of the pattern.</p>
+<table><tr><th>Object</th><th>Meaning</th><th>Expert interpretation</th></tr><tr><td>Step</td><td>A numbered position in the pattern.</td><td>A rhythmic cell. Treat it like a word in a sentence.</td></tr><tr><td>Page</td><td>One of four groups of 16 steps.</td><td>The sequencer can be short and punchy or long and evolving.</td></tr><tr><td>Track</td><td>A layer of instructions: STEP, SLIDE, ACCENT, REST, LENGTH.</td><td>Separate pitch content from articulation and form.</td></tr><tr><td>Layer</td><td>Upper or lower sound engine.</td><td>Two independent musical roles: bass + lead, pulse + pad, left-hand + right-hand, etc.</td></tr></table>
+<div class="callout"><strong>Principle:</strong> do not think “record a riff.” Think “design a machine that generates a riff.” The expert edits the machine, not just the notes.</div>
+</section>
+
+<section id="setup"><h2>2. Setup and safety checks</h2>
+<div class="step"><strong>Start from one simple sound.</strong> Load or create a patch with a clear attack and medium sustain. Avoid huge release tails while learning, because long tails hide timing mistakes.</div>
+<div class="step"><strong>Select one layer.</strong> Press <kbd>UPPER</kbd> first. Learn on one layer before combining layers.</div>
+<div class="step"><strong>Set a moderate tempo.</strong> Use a tempo where you can hear each step clearly. 90–110 BPM is ideal for training.</div>
+<div class="step"><strong>Turn sequencer mode on.</strong> Set <kbd>MODE</kbd> to <kbd>SEQ</kbd>, then press <kbd>ON</kbd>. If MODE is in an arpeggiator direction, ON activates the arpeggiator instead, so verify that SEQ is selected.</div>
+<div class="warning callout"><strong>Common failure:</strong> editing the wrong layer. Before every serious edit, press the layer button you intend: <kbd>UPPER</kbd> or <kbd>LOWER</kbd>.</div>
+</section>
+
+<section id="first-sequence"><h2>3. Your first sequence: four steps, no complexity</h2>
+<p>The goal is not musical sophistication. The goal is proving that you can enter, hear, and control step data.</p>
+<div class="step">Press <kbd>SEQ REC</kbd>. Its flashing state means the sequencer is armed for recording.</div>
+<div class="step">Make sure <kbd>TRACK</kbd> is set to <kbd>STEP</kbd>. This is where notes or chords are recorded.</div>
+<div class="step">Press step <kbd>1</kbd>. The selected step waits for input.</div>
+<div class="step">Play and release a note, such as C2. The note is recorded after you release all keys, then the sequencer advances.</div>
+<div class="step">Record three more notes: E2, G2, B2.</div>
+<div class="step">Set the sequence length to 4: press <kbd>TRACK</kbd> until <kbd>LENGTH</kbd>, stay on page 1, then press step <kbd>4</kbd>.</div>
+<div class="step">Press <kbd>ON</kbd> to hear the loop. Adjust tempo only after the pattern is working.</div>
+<div class="sequence" aria-label="Four step pattern"><div class="sq on">1</div><div class="sq on">2</div><div class="sq on">3</div><div class="sq on">4</div><div class="sq">5</div><div class="sq">6</div><div class="sq">7</div><div class="sq">8</div><div class="sq">9</div><div class="sq">10</div><div class="sq">11</div><div class="sq">12</div><div class="sq">13</div><div class="sq">14</div><div class="sq">15</div><div class="sq">16</div></div>
+<div class="practice"><strong>Drill:</strong> record C2 on all four steps. Then change only step 3 to G2. This teaches surgical editing.</div>
+</section>
+
+<section id="editing"><h2>4. Editing: the difference between a user and an operator</h2>
+<p>To edit a step, return to <kbd>TRACK: STEP</kbd>, press the step you want to change, then play and release the replacement note or chord. The sequencer advances after the release.</p>
+<h3>Precision edit workflow</h3>
+<div class="step">Stop the sequence only if you need silence. You can often edit while it runs.</div>
+<div class="step">Press <kbd>SEQ REC</kbd> if recording is not armed.</div>
+<div class="step">Select <kbd>TRACK: STEP</kbd>.</div>
+<div class="step">Press the target step.</div>
+<div class="step">Play the replacement note/chord and release all keys.</div>
+<div class="step">Listen for one full cycle before judging the edit.</div>
+<div class="callout"><strong>Expert habit:</strong> change one variable at a time. If you change notes, sound, clock division, accents, and length simultaneously, you cannot identify cause and effect.</div>
+</section>
+
+<section id="length"><h2>5. Length and pages: moving beyond 16 steps</h2>
+<p>The 16 buttons are not the whole sequencer. They are a window. <kbd>RANGE</kbd> selects which 16-step page you are editing:</p>
+<table><tr><th>RANGE page</th><th>Visible steps</th><th>Typical use</th></tr><tr><td>1</td><td>1–16</td><td>Classic one-bar patterns</td></tr><tr><td>2</td><td>17–32</td><td>Two-bar phrases</td></tr><tr><td>3</td><td>33–48</td><td>Four-bar development or variation</td></tr><tr><td>4</td><td>49–64</td><td>Long evolving sequences</td></tr></table>
+<h3>Creating a 32-step sequence</h3>
+<div class="step">Record steps 1–16 on page 1.</div>
+<div class="step">Press <kbd>RANGE</kbd> to page 2.</div>
+<div class="step">Record steps 17–32.</div>
+<div class="step">Go to <kbd>TRACK: LENGTH</kbd>.</div>
+<div class="step">While on page 2, press step <kbd>16</kbd>. That makes global step 32 the final step.</div>
+<div class="practice"><strong>Drill:</strong> make steps 1–16 stable, then steps 17–32 a variation. The listener should feel repetition plus motion.</div>
+</section>
+
+<section id="rests-accents-slides"><h2>6. Rests, accents, and slides: articulation is where sequences become music</h2>
+<h3>Rests</h3>
+<p><kbd>REST</kbd> tells a recorded note not to play. It does not require deleting the note. This is crucial because you can restore the note later by removing the rest.</p>
+<div class="sequence"><div class="sq on">1</div><div class="sq rest">2</div><div class="sq on">3</div><div class="sq rest">4</div><div class="sq on">5</div><div class="sq rest">6</div><div class="sq on">7</div><div class="sq rest">8</div><div class="sq">9</div><div class="sq">10</div><div class="sq">11</div><div class="sq">12</div><div class="sq">13</div><div class="sq">14</div><div class="sq">15</div><div class="sq">16</div></div>
+<div class="step">Select <kbd>TRACK: REST</kbd>.</div><div class="step">Press steps that should be silent.</div><div class="step">Use rests to create rhythm before changing pitches.</div>
+<h3>Accents</h3>
+<p><kbd>ACCENT</kbd> emphasizes selected steps. For accents to affect level and brightness, set the layer’s <kbd>DYNAMICS</kbd> switch in the VCA section to <kbd>1/2</kbd> or <kbd>ON</kbd>.</p>
+<div class="sequence"><div class="sq on accent">1</div><div class="sq on">2</div><div class="sq on">3</div><div class="sq on">4</div><div class="sq on accent">5</div><div class="sq on">6</div><div class="sq on">7</div><div class="sq on">8</div><div class="sq on accent">9</div><div class="sq on">10</div><div class="sq on">11</div><div class="sq on">12</div><div class="sq on accent">13</div><div class="sq on">14</div><div class="sq on">15</div><div class="sq on">16</div></div>
+<div class="practice"><strong>Drill:</strong> accent 1, 5, 9, 13 for a stable pulse. Then accent 3, 7, 11, 15 for syncopation. Same notes, different groove.</div>
+<h3>Slides / ties</h3>
+<p><kbd>SLIDE</kbd> ties adjacent steps. With non-zero portamento, tied notes of different pitch slide into one another.</p>
+<div class="step">Set portamento above zero.</div><div class="step">Select <kbd>TRACK: SLIDE</kbd>.</div><div class="step">Press adjacent steps, for example 3 and 4, to tie them.</div><div class="step">Use slides sparingly. Too many slides erase rhythmic definition.</div>
+</section>
+
+<section id="clock"><h2>7. Clock and timing: control the grid before decorating it</h2>
+<p><kbd>CLK DIV</kbd> sets playback speed in clock divisions relative to the internal tempo or external MIDI clock. Pressing the <kbd>CLK DIV</kbd> encoder resets the division to 1/16.</p>
+<table><tr><th>Goal</th><th>Clock strategy</th></tr><tr><td>Tight bassline</td><td>Start at 1/16, then use rests for rhythm.</td></tr><tr><td>Slow melodic sequence</td><td>Use slower divisions such as 1/8 or 1/4.</td></tr><tr><td>Polyrhythmic feel</td><td>Keep clock steady; use different sequence lengths per layer.</td></tr><tr><td>DAW sync</td><td>Enable MIDI Clock Receive in external clock settings; then tempo follows the external source.</td></tr></table>
+<div class="callout"><strong>Expert timing rule:</strong> first choose tempo, then clock division, then sequence length. Do not solve timing problems by randomly changing all three.</div>
+</section>
+
+<section id="performance"><h2>8. Performance control: transposition, hold, and live playing</h2>
+<h3>Hold + sequencer transposition</h3>
+<p>When <kbd>HOLD</kbd> is active for a layer and the sequencer is on, the sequence for that layer can be transposed from the keyboard. Transposition is relative to middle C (C4): play above C4 to transpose upward, below C4 to transpose downward.</p>
+<div class="step">Create a simple sequence in C.</div><div class="step">Activate <kbd>HOLD</kbd> for that layer.</div><div class="step">Play C4. The sequence stays at its original pitch.</div><div class="step">Play D4. The sequence transposes up a whole step.</div><div class="step">Play A3. The sequence transposes downward.</div>
+<h3>Playing over the sequence</h3>
+<p>When the sequencer is on and <kbd>SEQ REC</kbd> is flashing, remaining voices not used by the current sequence can be played along with the sequence. This turns the sequencer into an accompaniment engine rather than a replacement for performance.</p>
+</section>
+
+<section id="memory"><h2>9. Memory management: load, store, clear</h2>
+<table><tr><th>Task</th><th>Action</th><th>Use case</th></tr><tr><td>Clear sequence</td><td>Hold <kbd>SEQ REC</kbd>, press <kbd>MOD ASSIGN</kbd>.</td><td>Start over without changing the patch.</td></tr><tr><td>Load sequence</td><td>Press <kbd>SHIFT</kbd> then <kbd>MODE</kbd>; press one of the 16 select buttons.</td><td>Try stored sequences with the current patch.</td></tr><tr><td>Store sequence</td><td>Press <kbd>SHIFT</kbd> then <kbd>SEQ REC</kbd>; hold the desired select button for 3 seconds.</td><td>Save a pattern before destructive experimentation.</td></tr></table>
+<div class="warning callout"><strong>Discipline:</strong> store before making radical edits. Expert workflow is iterative: create → store → mutate → compare.</div>
+</section>
+
+<section id="layers"><h2>10. Using one sequencer for each layer simultaneously</h2>
+<p>This is the expert threshold. You are no longer making a pattern; you are coordinating two independent pattern-generators.</p>
+<h3>Choose the performance architecture</h3>
+<table><tr><th>Mode</th><th>What happens</th><th>Best use</th></tr><tr><td><kbd>DUAL</kbd></td><td>Upper and lower layers are stacked across the keyboard.</td><td>Two sequences that occupy the same keyboard range: bass + shimmer, pulse + accent layer.</td></tr><tr><td><kbd>SPLIT</kbd></td><td>Lower layer sits below the split point; upper layer sits at and above it.</td><td>Left-hand bass sequence and right-hand melodic/chord sequence.</td></tr></table>
+<h3>Build the upper-layer sequence</h3>
+<div class="step">Press <kbd>UPPER</kbd>.</div><div class="step">Load or design the upper patch. For training, use a short pluck or bright pulse.</div><div class="step">Set <kbd>MODE</kbd> to <kbd>SEQ</kbd> and turn <kbd>ON</kbd>.</div><div class="step">Press <kbd>SEQ REC</kbd>, select <kbd>TRACK: STEP</kbd>, and record a short 8- or 16-step phrase.</div><div class="step">Set <kbd>TRACK: LENGTH</kbd> for the upper layer. Start with 16 steps.</div><div class="step">Add accents and rests only after the notes loop correctly.</div>
+<h3>Build the lower-layer sequence</h3>
+<div class="step">Press <kbd>LOWER</kbd>. This is the critical switch.</div><div class="step">Load or design the lower patch. Use a bass, drone, or darker support sound.</div><div class="step">Verify <kbd>MODE</kbd> is still <kbd>SEQ</kbd> for the lower layer and turn <kbd>ON</kbd> for that layer.</div><div class="step">Press <kbd>SEQ REC</kbd>, select <kbd>TRACK: STEP</kbd>, and record a complementary pattern.</div><div class="step">Set lower length independently. Try 8 steps under a 16-step upper pattern, then try 12 under 16 for phase movement.</div>
+<h3>Make both layers musically coherent</h3>
+<div class="step"><strong>Register separation:</strong> keep lower notes low and upper notes mid/high.</div><div class="step"><strong>Rhythmic separation:</strong> if the lower layer is busy, make the upper sparse. If upper is busy, make lower stable.</div><div class="step"><strong>Sound separation:</strong> filter one layer darker and one brighter. Do not let both occupy the same spectral lane.</div><div class="step"><strong>Length contrast:</strong> use equal lengths for stability; unequal lengths for evolving patterns.</div><div class="step"><strong>Transposition control:</strong> activate hold on one or both layers and use keyboard input to transpose sequences relative to C4.</div>
+<div class="practice"><strong>Two-layer drill:</strong> lower layer = 8-step bass pattern with rests on 2, 4, 6, 8. Upper layer = 16-step chord stab pattern with accents on 1, 7, 11, 15. Then set lower length to 7 and observe how the cycle evolves.</div>
+</section>
+
+<section id="expert"><h2>11. Expert drills: world-class habits</h2>
+<div class="grid"><div class="card"><h3>Drill A: one-note mastery</h3><p>Use the same note on all 16 steps. Create interest only with rests, accents, length, filter, and clock division. This proves you understand sequencing beyond pitch.</p></div><div class="card"><h3>Drill B: destructive mutation</h3><p>Store a sequence. Change every third step. Compare the new pattern against the original. Keep whichever has stronger identity.</p></div><div class="card"><h3>Drill C: length asymmetry</h3><p>Upper length 16, lower length 15. Keep both simple. Listen to the composite pattern over multiple cycles.</p></div><div class="card"><h3>Drill D: performance transposition</h3><p>Create a sequence in C. Hold it, then perform a chord progression by transposing from the keyboard rather than rewriting notes.</p></div><div class="card"><h3>Drill E: silence design</h3><p>Record a dense pattern, then use REST to remove half the steps. The best groove is often subtraction, not addition.</p></div><div class="card"><h3>Drill F: two-layer orchestration</h3><p>Lower layer supplies rhythm; upper layer supplies harmony. Then reverse roles. Mastery means either layer can lead.</p></div></div>
+</section>
+
+<section id="cheatsheet"><h2>12. Cheat sheet</h2>
+<table><tr><th>Need</th><th>Do this</th></tr><tr><td>Enter sequencer mode</td><td>Set <kbd>MODE</kbd> to <kbd>SEQ</kbd>, then use <kbd>ON</kbd>.</td></tr><tr><td>Record notes/chords</td><td><kbd>SEQ REC</kbd> → <kbd>TRACK: STEP</kbd> → press step → play and release.</td></tr><tr><td>Edit a step</td><td><kbd>TRACK: STEP</kbd> → press target step → play replacement and release.</td></tr><tr><td>View steps 17–64</td><td>Use <kbd>RANGE</kbd> pages 2–4.</td></tr><tr><td>Set final step</td><td><kbd>TRACK: LENGTH</kbd> → choose page with <kbd>RANGE</kbd> → press final step.</td></tr><tr><td>Make silence</td><td><kbd>TRACK: REST</kbd> → press steps to skip.</td></tr><tr><td>Make emphasis</td><td><kbd>TRACK: ACCENT</kbd> → press accented steps; set VCA <kbd>DYNAMICS</kbd> to <kbd>1/2</kbd> or <kbd>ON</kbd>.</td></tr><tr><td>Make slides</td><td>Set portamento non-zero → <kbd>TRACK: SLIDE</kbd> → press adjacent tied steps.</td></tr><tr><td>Clear pattern</td><td>Hold <kbd>SEQ REC</kbd> + press <kbd>MOD ASSIGN</kbd>.</td></tr><tr><td>Store pattern</td><td><kbd>SHIFT</kbd> + <kbd>SEQ REC</kbd> → hold memory button 3 seconds.</td></tr><tr><td>Load pattern</td><td><kbd>SHIFT</kbd> + <kbd>MODE</kbd> → press memory button.</td></tr><tr><td>Edit other layer</td><td>Press <kbd>UPPER</kbd> or <kbd>LOWER</kbd>, then repeat sequencer workflow.</td></tr></table>
+</section>
+
+<footer class="footer"><p>Source basis: UDO Super Gemini / Super 8 Owner’s Manual v1.0, especially Arpeggiator & Sequencer, Clock Parameters, Keyboard/Layer, Hold, and sequence storage sections. This training manual is an expanded practical curriculum, not a replacement for the official manual.</p></footer>
+</div>
+</body>
+</html>
