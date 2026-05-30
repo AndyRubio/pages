@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spaced Repetition for Piano Exam Pieces</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #667085;
+      --paper: #fffdf8;
+      --cream: #f7efe3;
+      --accent: #7c3aed;
+      --accent-dark: #5b21b6;
+      --accent-soft: #ede9fe;
+      --green: #e7f8ef;
+      --yellow: #fff7db;
+      --red: #fdeaea;
+      --line: #e5dccf;
+      --shadow: 0 18px 45px rgba(31, 41, 51, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(124, 58, 237, 0.12), transparent 28%),
+        radial-gradient(circle at 80% 0%, rgba(245, 158, 11, 0.12), transparent 24%),
+        linear-gradient(135deg, #f8f3ea 0%, #ffffff 52%, #f3eefc 100%);
+      line-height: 1.65;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 42px auto;
+      padding: 0 22px 56px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 54px 54px 46px;
+      border-radius: 32px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,239,227,0.94)),
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent 21px,
+          rgba(31, 41, 51, 0.08) 22px,
+          transparent 23px
+        );
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(229, 220, 207, 0.85);
+    }
+
+    .hero::before {
+      content: "♬";
+      position: absolute;
+      right: 38px;
+      top: 20px;
+      font-size: 110px;
+      color: rgba(124, 58, 237, 0.13);
+      line-height: 1;
+      transform: rotate(-8deg);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent-dark);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(36px, 6vw, 62px);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      max-width: 740px;
+      margin: 20px 0 0;
+      font-size: 20px;
+      color: #374151;
+    }
+
+    .highlight {
+      display: inline;
+      background: linear-gradient(transparent 58%, rgba(196, 181, 253, 0.75) 58%);
+      padding: 0 0.08em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: rgba(255, 253, 248, 0.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 28px rgba(31, 41, 51, 0.08);
+      padding: 28px;
+    }
+
+    .span-12 { grid-column: span 12; }
+    .span-7 { grid-column: span 7; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 28px;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      margin: 24px 0 8px;
+      font-size: 20px;
+    }
+
+    p {
+      margin: 0 0 16px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .lead {
+      font-size: 19px;
+      color: #344054;
+    }
+
+    .rule {
+      padding: 22px 24px;
+      border-left: 7px solid var(--accent);
+      background: var(--accent-soft);
+      border-radius: 18px;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: white;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+    }
+
+    th {
+      background: #2f234f;
+      color: white;
+      text-align: left;
+      padding: 13px 16px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    td {
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+      background: #fbf8f1;
+    }
+
+    ul, ol {
+      margin: 10px 0 0 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    .status-row {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .status {
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(31,41,51,0.08);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .status strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .green { background: var(--green); }
+    .yellow { background: var(--yellow); }
+    .red { background: var(--red); }
+
+    .checkpoints {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .chip {
+      padding: 10px 13px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .routine {
+      counter-reset: step;
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .routine li {
+      position: relative;
+      padding: 14px 14px 14px 54px;
+      margin: 10px 0;
+      border-radius: 16px;
+      background: #fbf8f1;
+      border: 1px solid var(--line);
+    }
+
+    .routine li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 14px;
+      top: 13px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 800;
+    }
+
+    .memory-layers {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .layer {
+      min-height: 128px;
+      padding: 18px 14px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid var(--line);
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .layer .icon {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .layer strong {
+      display: block;
+      color: var(--accent-dark);
+      margin-bottom: 4px;
+    }
+
+    .log {
+      padding: 20px;
+      background: #1f2933;
+      color: #f9fafb;
+      border-radius: 18px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 14px;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      overflow-x: auto;
+    }
+
+    .quote {
+      font-size: 25px;
+      line-height: 1.35;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #2f234f;
+    }
+
+    .footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+    }
+
+    @media (max-width: 780px) {
+      .hero {
+        padding: 38px 28px;
+      }
+
+      .span-7,
+      .span-5,
+      .span-6 {
+        grid-column: span 12;
+      }
+
+      .memory-layers,
+      .checkpoints {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        font-size: 14px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page {
+        margin: 0;
+        max-width: none;
+        padding: 0;
+      }
+
+      .hero,
+      .card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      .card {
+        margin-bottom: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <p class="eyebrow">Piano Exam Preparation</p>
+      <h1>Spaced Repetition for <span class="highlight">Secure Performance Memory</span></h1>
+      <p class="subtitle">
+        A practical system for keeping mastered pieces reliable, musical, and exam-ready months after you first learn them.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>The core idea</h2>
+        <p class="lead">
+          Spaced repetition means revisiting your pieces just before they start to decay, rather than playing them every day until they feel automatic and then forgetting them later.
+        </p>
+        <div class="rule">
+          The goal is not merely “I can play it now.” The goal is: “I can retrieve it cold, under pressure, weeks or months from now.”
+        </div>
+      </article>
+
+      <article class="card span-7">
+        <h2>A simple review schedule</h2>
+        <p>
+          Once a piece is mastered, move from daily repetition to short, high-quality recall sessions with gradually increasing gaps.
+        </p>
+        <table aria-label="Spaced repetition review schedule">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>When to revisit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>First review</td>
+              <td>Next day</td>
+            </tr>
+            <tr>
+              <td>Second review</td>
+              <td>2–3 days later</td>
+            </tr>
+            <tr>
+              <td>Third review</td>
+              <td>5–7 days later</td>
+            </tr>
+            <tr>
+              <td>Fourth review</td>
+              <td>10–14 days later</td>
+            </tr>
+            <tr>
+              <td>Later reviews</td>
+              <td>Every 2–4 weeks</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <aside class="card span-5">
+        <h2>How to judge each review</h2>
+        <p>Begin with a cold play-through: sit down and play as if you are already in the exam.</p>
+        <div class="status-row">
+          <div class="status green">
+            <strong>Green</strong>
+            Secure, musical, few or no errors. Move the next review further away.
+          </div>
+          <div class="status yellow">
+            <strong>Yellow</strong>
+            Mostly secure, but one or two weak spots. Practise those bars slowly and review sooner.
+          </div>
+          <div class="status red">
+            <strong>Red</strong>
+            Memory slips, technical breakdowns, panic, or repeated errors. Isolate and rebuild the failure point.
+          </div>
+        </div>
+      </aside>
+
+      <article class="card span-6">
+        <h2>Use memory checkpoints</h2>
+        <p>
+          Choose several reliable starting points in each piece. You should be able to start cleanly from any of them, not only from bar 1.
+        </p>
+        <div class="checkpoints">
+          <span class="chip">Beginning</span>
+          <span class="chip">Start of each section</span>
+          <span class="chip">Difficult transition</span>
+          <span class="chip">Page turn</span>
+          <span class="chip">Final section</span>
+          <span class="chip">Common mistake spot</span>
+        </div>
+        <h3>Checkpoint drill</h3>
+        <ol>
+          <li>Pick a checkpoint at random.</li>
+          <li>Start from there without looking back.</li>
+          <li>Play 4–8 bars.</li>
+          <li>Stop and choose another checkpoint.</li>
+        </ol>
+      </article>
+
+      <article class="card span-6">
+        <h2>Do not overplay the whole piece</h2>
+        <p>
+          Repeated full run-throughs feel reassuring, but they often strengthen what is already secure while leaving weak links weak.
+        </p>
+        <ol class="routine">
+          <li>Cold run</li>
+          <li>Identify weak spots</li>
+          <li>Isolate weak spots</li>
+          <li>Test random starts</li>
+          <li>Finish with one musical performance run, only if needed</li>
+        </ol>
+      </article>
+
+      <article class="card span-12">
+        <h2>A sample weekly rotation</h2>
+        <p>
+          Once both pieces are mastered, they do not need heavy daily practice. Rotate recall, repair, and mock performance.
+        </p>
+        <table aria-label="Sample weekly piano practice rotation">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Work</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monday</td>
+              <td>Piece 1 cold play-through + fix weak spots</td>
+            </tr>
+            <tr>
+              <td>Tuesday</td>
+              <td>Piece 2 cold play-through + fix weak spots</td>
+            </tr>
+            <tr>
+              <td>Wednesday</td>
+              <td>No full run; only tricky bars and checkpoints</td>
+            </tr>
+            <tr>
+              <td>Thursday</td>
+              <td>Piece 1 memory checkpoints</td>
+            </tr>
+            <tr>
+              <td>Friday</td>
+              <td>Piece 2 memory checkpoints</td>
+            </tr>
+            <tr>
+              <td>Saturday</td>
+              <td>Mock exam: both pieces in order</td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td>Rest or light mental practice</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card span-12">
+        <h2>Practise away from the piano</h2>
+        <p>
+          Strong performance memory is not only stored in the fingers. Build multiple layers of recall so a single slip does not collapse the piece.
+        </p>
+        <div class="memory-layers">
+          <div class="layer">
+            <span class="icon">🎧</span>
+            <strong>Aural</strong>
+            How the piece sounds.
+          </div>
+          <div class="layer">
+            <span class="icon">👁️</span>
+            <strong>Visual</strong>
+            What the score and keyboard patterns look like.
+          </div>
+          <div class="layer">
+            <span class="icon">✋</span>
+            <strong>Motor</strong>
+            What the hands do.
+          </div>
+          <div class="layer">
+            <span class="icon">🧭</span>
+            <strong>Structural</strong>
+            Where the sections, phrases, repeats, and climaxes occur.
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <h2>Keep a review log</h2>
+        <p>
+          Record what happened and choose the next review date based on evidence.
+        </p>
+        <div class="log">Piece 1 — Review log
+
+30 May: cold run secure, small stumble bar 18.
+Next review: 2 June.
+
+2 June: bar 18 fixed, ending rushed.
+Next review: 6 June.
+
+6 June: secure from checkpoints.
+Next review: 13 June.</div>
+      </article>
+
+      <article class="card span-6">
+        <h2>The adjustment rule</h2>
+        <p class="quote">
+          If the piece is secure, increase the gap. If it is shaky, shorten the gap.
+        </p>
+        <p>
+          This is the mechanism that makes spaced repetition work: the schedule adapts to actual recall rather than habit or guesswork.
+        </p>
+      </article>
+
+      <article class="card span-12">
+        <h2>Six to eight weeks before the exam</h2>
+        <p>
+          Start doing mock exams. Walk into the room, sit down, play without stopping, and include other exam elements such as scales, sight-reading, or aural work if relevant.
+        </p>
+        <p>
+          Record yourself. Then listen back and write down only the top two or three fixes. Do not try to repair everything at once.
+        </p>
+        <div class="rule">
+          Review less often than daily, but make each review a real test. That is what makes the memory durable.
+        </div>
+      </article>
+    </section>
+
+    <p class="footer">Created as a piano practice handout · Spaced repetition for exam-piece maintenance</p>
+  </main>
+</body>
+</html>
