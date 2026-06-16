@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OXI ONE MKII Mastery Tutorial</title>
+<style>
+  :root{--bg:#0b0f13;--panel:#121922;--panel2:#182231;--text:#e8eef5;--muted:#a9b7c6;--accent:#5ce1e6;--accent2:#d987ff;--warn:#ffcc66;--ok:#87f59a;--line:#2a3748;--code:#0a0d11;}
+  *{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#080b0f,#0f151d 38%,#0b0f13);color:var(--text);font:16px/1.58 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+  header{padding:54px 28px 32px;border-bottom:1px solid var(--line);background:radial-gradient(circle at 70% 0%,rgba(92,225,230,.16),transparent 30%),radial-gradient(circle at 20% 20%,rgba(217,135,255,.13),transparent 35%)}
+  main{max-width:1180px;margin:auto;padding:24px} h1{font-size:clamp(2rem,4vw,4.2rem);line-height:1.03;margin:0 0 16px;letter-spacing:-.04em} h2{font-size:2rem;margin:42px 0 14px;border-top:1px solid var(--line);padding-top:28px} h3{font-size:1.35rem;margin:28px 0 10px} h4{margin:22px 0 8px;color:#fff} p{margin:0 0 14px}.lead{font-size:1.18rem;color:var(--muted);max-width:920px}.badge{display:inline-block;border:1px solid var(--line);background:rgba(92,225,230,.08);color:#bffcff;border-radius:999px;padding:.25rem .65rem;margin:.15rem;font-size:.84rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.card{background:linear-gradient(180deg,var(--panel),#0f151d);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.22)}.card strong{color:#fff}.warning{border-left:5px solid var(--warn);background:rgba(255,204,102,.08);padding:14px 16px;border-radius:12px}.success{border-left:5px solid var(--ok);background:rgba(135,245,154,.08);padding:14px 16px;border-radius:12px}.steps{counter-reset:step;list-style:none;padding:0;margin:12px 0}.steps li{counter-increment:step;margin:10px 0;padding:12px 14px 12px 52px;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:12px;position:relative}.steps li:before{content:counter(step);position:absolute;left:14px;top:12px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:#001014;font-weight:800}.seq{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0 18px;overflow:hidden;border:1px solid var(--line);border-radius:12px}.seq th,.seq td{padding:8px 10px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);vertical-align:top}.seq th{background:var(--panel2);text-align:left}.seq tr:last-child td{border-bottom:0}.seq td:last-child,.seq th:last-child{border-right:0}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#0a0d11;border:1px solid #344256;border-radius:6px;padding:.1rem .35rem;color:#d7faff;white-space:nowrap}.matrix{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;overflow:auto;background:var(--code);border:1px solid var(--line);border-radius:14px;padding:14px;color:#c8f7ff}.toc a{display:block;color:#dffbff;text-decoration:none;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.08)}.toc a:hover{color:white}.pillrow{margin:10px 0 4px}.small{font-size:.92rem;color:var(--muted)}.practice{background:linear-gradient(90deg,rgba(92,225,230,.1),rgba(217,135,255,.09));border:1px solid var(--line);border-radius:16px;padding:16px;margin:18px 0}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:760px){.two{grid-template-columns:1fr}main{padding:16px}.seq{font-size:.9rem}}
+</style>
+</head>
+<body>
+<header>
+  <h1>OXI ONE MKII Mastery Tutorial</h1>
+  <p class="lead">A structured, hands-on curriculum for turning the OXI ONE MKII from a complex sequencer into a precise composition and performance instrument. Every lesson contains explicit button moves, concrete step patterns, and repeatable drills.</p>
+  <div class="pillrow"><span class="badge">8 sequencers</span><span class="badge">128-step patterns</span><span class="badge">MIDI / USB / BLE / CV-Gate</span><span class="badge">Performance + Arranger</span><span class="badge">Modulation lanes + LFOs</span></div>
+</header>
+<main>
+<section class="card">
+  <h2 style="border-top:0;padding-top:0;margin-top:0">How to use this tutorial</h2>
+  <p>This is not a reference manual. It is a sequence of deliberate exercises. Do the modules in order once, then return to individual modules as drills. The goal is operational mastery: you should be able to create, mutate, perform, arrange, save, and reconnect a project without hunting through menus.</p>
+  <div class="warning"><strong>Ground rule:</strong> the OXI ONE MKII does not produce audio by itself. Connect it to a synth, drum machine, modular voice, iPad app, or DAW instrument before judging the result.</div>
+  <h3>Notation</h3>
+  <p><span class="kbd">[Button]</span> means press a front-panel button. <span class="kbd">(Knob 1)</span> through <span class="kbd">(Knob 4)</span> mean the four encoders from left to right. <span class="kbd">[Shift] + [Button]</span> means hold Shift while pressing the other control. A “step” means a column position in the pattern. A “row” means pitch, track, probability, or function depending on the current mode.</p>
+</section>
+
+<section class="toc card">
+  <h2 style="border-top:0;padding-top:0;margin-top:0">Curriculum map</h2>
+  <a href="#module1">1. Orientation, project safety, and setup</a>
+  <a href="#module2">2. Sequencer grammar: steps, pages, length, scale, and root</a>
+  <a href="#module3">3. Mono mode: build a precise melodic phrase</a>
+  <a href="#module4">4. Pattern shaping: velocity, gate, repeats, probability, swing, and time division</a>
+  <a href="#module5">5. Poly and Chord modes: harmony without guesswork</a>
+  <a href="#module6">6. Multitrack mode: drum programming and multi-lane composition</a>
+  <a href="#module7">7. Generators: Euclidean, random, stochastic, and controlled surprise</a>
+  <a href="#module8">8. Modulation mastery: lanes, LFOs, Quick Assign, and musical automation</a>
+  <a href="#module9">9. Performance tools: Keyboard, Arp, Flow, Roller, Perform, Snapshots</a>
+  <a href="#module10">10. Arranger: turn patterns into a song</a>
+  <a href="#module11">11. Connectivity: MIDI, CV/Gate, clock, and troubleshooting logic</a>
+  <a href="#module12">12. Master practice projects and assessment checklist</a>
+</section>
+
+<section id="module1">
+  <h2>1. Orientation, project safety, and setup</h2>
+  <div class="grid">
+    <div class="card"><strong>Sequencers</strong><p>The instrument contains 8 independent sequencers. Treat each as a musician: bass, lead, pad, kick, snare, hats, modulation, or generative texture.</p></div>
+    <div class="card"><strong>Patterns</strong><p>A project can contain patterns for the sequencers. A pattern can run up to 128 steps, viewed through the page buttons <span class="kbd">[16]</span>, <span class="kbd">[32]</span>, <span class="kbd">[48]</span>, and <span class="kbd">[64]</span>; double-taps access later pages.</p></div>
+    <div class="card"><strong>Project discipline</strong><p>Project = total state: sequencers, patterns, songs, settings, mappings. Save often using <span class="kbd">[Shift] + [Save]</span>.</p></div>
+  </div>
+  <h3>First power-on drill</h3>
+  <ol class="steps">
+    <li>Insert the microSD card before powering on. This avoids missing folder structure problems later.</li>
+    <li>Connect power or use battery. Connect MIDI USB, TRS MIDI, Bluetooth MIDI, or CV/Gate to one sound source.</li>
+    <li>Press the side power button. After boot, double tap <span class="kbd">[Back]</span> to guarantee you are at the home sequencer view.</li>
+    <li>Press <span class="kbd">[Load]</span>. Use <span class="kbd">(Knob 1)</span> to inspect project slots. Do not overwrite a meaningful slot yet.</li>
+    <li>Press <span class="kbd">[Save]</span>. Move to an empty or sacrificial slot with <span class="kbd">(Knob 1)</span>, press <span class="kbd">(Knob 1)</span>, choose save, press <span class="kbd">(Knob 1)</span> again.</li>
+    <li>Rename the project later, but for now quick-save with <span class="kbd">[Shift] + [Save]</span> after every completed module.</li>
+  </ol>
+  <div class="practice"><strong>Mastery standard:</strong> you can load, save, quick-save, back out of menus, and return home without thinking. This matters more than creativity at the beginning.</div>
+</section>
+
+<section id="module2">
+  <h2>2. Sequencer grammar: steps, pages, length, scale, and root</h2>
+  <p>The OXI grid is context-sensitive. In Mono/Poly/Chord, columns are time and rows are pitch or chord degrees. In Multitrack, rows are tracks. In Stochastic, columns are note slots rather than ordinary step positions. Mastery begins by knowing what the grid means before placing data.</p>
+  <h3>Global navigation drill</h3>
+  <ol class="steps">
+    <li>Tap <span class="kbd">[1]</span> to select sequencer 1. Its sequencer button should indicate focus.</li>
+    <li>Hold <span class="kbd">[Shift] + [1]</span> to open sequencer settings. On setup page 1, set <span class="kbd">Mode</span> to <strong>MONO</strong>. Set output and MIDI channel or CV/Gate mapping according to your rig.</li>
+    <li>Double tap <span class="kbd">[Back]</span> to return home.</li>
+    <li>Hold <span class="kbd">[Shift]</span> and turn <span class="kbd">(BPM / Knob 1)</span> to set tempo to <strong>120</strong>.</li>
+    <li>Hold <span class="kbd">[Shift]</span> and turn <span class="kbd">(Scal / Knob 3)</span> to select <strong>Minor</strong>. Hold <span class="kbd">[Shift]</span> and turn <span class="kbd">(Root / Knob 4)</span> to select <strong>C2</strong>.</li>
+    <li>Use <span class="kbd">(Oct / Knob 2)</span> to place C2/F2/G2 within visible rows. Press <span class="kbd">[Keyboard]</span> only when you want a playable keyboard layout; press it again or back out to return to sequencer editing.</li>
+  </ol>
+  <h3>Page and length drill</h3>
+  <table class="seq"><tr><th>Goal</th><th>Command</th><th>What to verify</th></tr><tr><td>View steps 1–16</td><td>Tap <span class="kbd">[16]</span></td><td>The first page is visible.</td></tr><tr><td>View steps 17–32</td><td>Tap <span class="kbd">[32]</span></td><td>The visible page moves right.</td></tr><tr><td>Set start</td><td>Hold <span class="kbd">[Init]</span> and tap the desired first step pad</td><td>Playback begins there.</td></tr><tr><td>Set end</td><td>Hold <span class="kbd">[End]</span> and tap the desired final step pad</td><td>Loop length changes.</td></tr><tr><td>Move all data</td><td>Hold <span class="kbd">[Shift]</span> + tap <span class="kbd">[16]</span>/<span class="kbd">[32]</span>/<span class="kbd">[48]</span>/<span class="kbd">[64]</span></td><td>Sequence shifts left/up/down/right depending on page key.</td></tr></table>
+</section>
+
+<section id="module3">
+  <h2>3. Mono mode: build a precise melodic phrase</h2>
+  <p>Mono mode is the fastest route to understanding the instrument. One track, one note per step, 128 possible steps. The grid behaves like a piano-roll constrained by the chosen scale.</p>
+  <h3>Exercise 3A — six-step minor cell</h3>
+  <ol class="steps">
+    <li>Select <span class="kbd">[1]</span>. Set mode to <strong>MONO</strong> with <span class="kbd">[Shift] + [1]</span>, then return home.</li>
+    <li>Set <strong>120 BPM</strong>, <strong>C minor</strong>, root <strong>C2</strong>.</li>
+    <li>Set pattern length to 6: hold <span class="kbd">[End]</span> and tap the pad in column 6. Start should remain step 1.</li>
+    <li>Enter notes: column 1 = C2, column 3 = F2, column 5 = G2. Tap one pad in each specified column at the row matching that pitch.</li>
+    <li>Press <span class="kbd">[Play]</span>. You should hear a looping 6-step phrase that cycles against 4/4 in a slightly offset way.</li>
+  </ol>
+  <table class="seq"><tr><th>Step</th><th>Pitch</th><th>Velocity</th><th>Gate</th><th>Repeat</th><th>Probability</th></tr><tr><td>1</td><td>C2</td><td>90</td><td>50%</td><td>Off</td><td>100%</td></tr><tr><td>2</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>3</td><td>F2</td><td>75</td><td>35%</td><td>Off</td><td>100%</td></tr><tr><td>4</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>5</td><td>G2</td><td>95</td><td>70%</td><td>Off</td><td>100%</td></tr><tr><td>6</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></table>
+  <h3>Exercise 3B — accumulator motion</h3>
+  <ol class="steps">
+    <li>Hold the step-3 pad, then tap <span class="kbd">[Page]</span> until you reach the step submenu containing accumulator controls.</li>
+    <li>Still holding step 3, turn <span class="kbd">(Amt / Knob 1)</span> to <strong>+1st</strong>.</li>
+    <li>Hold the step-5 pad and set accumulator amount to <strong>-1st</strong>.</li>
+    <li>Listen for gradual small pitch displacement. Then reset either accumulator by holding the relevant step and setting amount back to 0.</li>
+  </ol>
+  <h3>Exercise 3C — copy the phrase and make counterpoint</h3>
+  <ol class="steps">
+    <li>Hold <span class="kbd">[Copy]</span> and tap <span class="kbd">[1]</span>.</li>
+    <li>Hold <span class="kbd">[Paste]</span> and tap <span class="kbd">[2]</span>. Sequencer 2 now carries the phrase.</li>
+    <li>Select <span class="kbd">[2]</span>. Set its output channel to a second sound.</li>
+    <li>On sequencer 2, set length to 8 steps. Move the G2 note from step 5 to step 7. Lower velocity on step 3 to 60. This creates separation from sequencer 1.</li>
+  </ol>
+</section>
+
+<section id="module4">
+  <h2>4. Pattern shaping: velocity, gate, repeats, probability, swing, and time division</h2>
+  <p>A beginner places notes. An advanced user shapes event behavior. Work through the same six-step phrase and deliberately alter one parameter at a time.</p>
+  <h3>Parameter access logic</h3>
+  <table class="seq"><tr><th>Task</th><th>Command</th><th>Use case</th></tr><tr><td>Change all steps</td><td>Turn the visible parameter knob from the home view.</td><td>Make the whole sequence shorter, louder, or more repetitive.</td></tr><tr><td>Change one step</td><td>Hold the step pad + turn the visible parameter knob.</td><td>Accent only step 1, shorten only step 3, make only step 5 repeat.</td></tr><tr><td>Access more step parameters</td><td>Hold step pad + tap <span class="kbd">[Page]</span>, or hold <span class="kbd">[Shift]</span> + hold step pad.</td><td>Reach offset, range, duration, CV glide, repeat percentage, and additional pages.</td></tr><tr><td>Undo a bad edit</td><td>Tap <span class="kbd">[Undo]</span>.</td><td>Recover quickly while experimenting.</td></tr></table>
+  <h3>Exercise 4A — make a phrase breathe</h3>
+  <ol class="steps">
+    <li>On sequencer 1, hold step 1 and set velocity to <strong>110</strong>, gate to <strong>80%</strong>.</li>
+    <li>Hold step 3 and set velocity to <strong>72</strong>, gate to <strong>32%</strong>.</li>
+    <li>Hold step 5 and set velocity to <strong>95</strong>, gate to <strong>55%</strong>.</li>
+    <li>Set global swing by holding <span class="kbd">[Shift]</span> and turning <span class="kbd">(SWNG / Knob 2)</span> to <strong>54–58%</strong>. Do not overdo it yet.</li>
+    <li>Press <span class="kbd">[Play]</span> and compare against straight 50% swing.</li>
+  </ol>
+  <h3>Exercise 4B — controlled repeats</h3>
+  <table class="seq"><tr><th>Step</th><th>Repeat</th><th>Gate</th><th>Probability</th><th>Purpose</th></tr><tr><td>1</td><td>Off</td><td>80%</td><td>100%</td><td>Anchor</td></tr><tr><td>3</td><td>x2</td><td>32%</td><td>85%</td><td>Occasional chatter</td></tr><tr><td>5</td><td>x3</td><td>45%</td><td>65%</td><td>Turnaround variation</td></tr></table>
+  <ol class="steps">
+    <li>Hold step 3 and turn <span class="kbd">(Rept / Knob 4)</span> to x2.</li>
+    <li>Hold step 5 and turn <span class="kbd">(Rept / Knob 4)</span> to x3.</li>
+    <li>Open the step submenu with step 5 held and tap <span class="kbd">[Page]</span>. Adjust repeat spacing/ramp if available on that page. Listen for whether the repeat acts as a fill or clutter.</li>
+    <li>Lower trigger probability on step 5 to around 65%. The pattern should now have a reliable skeleton with a variable ending.</li>
+  </ol>
+  <h3>Exercise 4C — time division contrast</h3>
+  <ol class="steps">
+    <li>Copy sequencer 1 to sequencer 3.</li>
+    <li>Select sequencer 3 and set it to a pluck or percussive sound.</li>
+    <li>Use <span class="kbd">[Shift] + [Page]</span> to increase time-division resolution, or <span class="kbd">[Shift] + [LFO]</span> to reduce it. Also test <span class="kbd">[Shift] + [Init]</span> and <span class="kbd">[Shift] + [End]</span> for doubling/halving behavior.</li>
+    <li>Set sequencer 3 to a faster division than sequencer 1. Mute/unmute to hear how identical notes become a new layer through timing alone.</li>
+  </ol>
+</section>
+
+<section id="module5">
+  <h2>5. Poly and Chord modes: harmony without guesswork</h2>
+  <div class="two">
+    <div class="card"><h3 style="margin-top:0">Poly mode</h3><p>Poly mode is free-form polyphony: multiple notes can exist on the same step. Use it when you want exact voicings, clusters, two-note intervals, or written parts.</p></div>
+    <div class="card"><h3 style="margin-top:0">Chord mode</h3><p>Chord mode sequences chord structures, inversions, and voicings. Use it when you want fast harmonic progressions and scale-based chord thinking.</p></div>
+  </div>
+  <h3>Exercise 5A — Poly: exact voicing loop</h3>
+  <ol class="steps">
+    <li>Select sequencer 4. Hold <span class="kbd">[Shift] + [4]</span> and set mode to <strong>POLY</strong>. Set output to a polyphonic synth.</li>
+    <li>Set scale to <strong>C minor</strong>, root C2, length 16.</li>
+    <li>Enter this four-chord loop. For each step, tap multiple rows in the same column to form the voicing.</li>
+  </ol>
+  <table class="seq"><tr><th>Step</th><th>Voicing</th><th>Gate</th><th>Velocity</th></tr><tr><td>1</td><td>C2 + G2 + Eb3</td><td>90%</td><td>88</td></tr><tr><td>5</td><td>Ab2 + Eb3 + C4</td><td>85%</td><td>82</td></tr><tr><td>9</td><td>F2 + C3 + Ab3</td><td>85%</td><td>84</td></tr><tr><td>13</td><td>G2 + D3 + Bb3</td><td>70%</td><td>92</td></tr></table>
+  <h3>Exercise 5B — Chord: stored chord palette</h3>
+  <ol class="steps">
+    <li>Select sequencer 5. Set mode to <strong>CHRD</strong>. Use a chord-capable synth patch.</li>
+    <li>Set scale/root to <strong>C minor</strong>. Press <span class="kbd">[Keyboard]</span> to access chord selection.</li>
+    <li>Use columns 13–16 to choose chord type, voicing/inversion, spread, and chord bank. Audition chords.</li>
+    <li>Store four chords by holding a keyboard chord pad and then holding an empty top-row memory pad 1–12 until it lights.</li>
+    <li>Return to sequencer view. Hold <span class="kbd">[Keyboard]</span>, tap stored chord 1, release, then tap step 1. Repeat chord 2 at step 5, chord 3 at step 9, chord 4 at step 13.</li>
+    <li>On step 13, add x2 repeat and lower probability to 80% for an occasional cadence variation.</li>
+  </ol>
+  <div class="practice"><strong>Harmony drill:</strong> for 10 minutes, build a progression in Poly mode, then rebuild it in Chord mode. The difference trains exact note entry versus harmonic abstraction.</div>
+</section>
+
+<section id="module6">
+  <h2>6. Multitrack mode: drum programming and multi-lane composition</h2>
+  <p>Multitrack mode gives eight independent monophonic tracks. The default grid view maps rows bottom-to-top as tracks 1–8. Each track can have its own length, start/end, time division, and groove behavior, which makes it ideal for drums.</p>
+  <h3>Exercise 6A — 16-step drum kit</h3>
+  <ol class="steps">
+    <li>Select sequencer 6. Hold <span class="kbd">[Shift] + [6]</span> and set mode to <strong>MULTI</strong>.</li>
+    <li>Assign the output to a drum machine or DAW drum rack. Map tracks bottom to top: 1 Kick, 2 Snare, 3 Closed Hat, 4 Open Hat, 5 Clap, 6 Perc, 7 Tom, 8 FX.</li>
+    <li>Set length to 16 steps. Enter the pattern below.</li>
+  </ol>
+  <div class="matrix">Steps:  01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16
+T8 FX:  -- -- -- -- -- -- -- -- -- -- -- -- -- -- X  --
+T7 Tom: -- -- -- -- -- -- -- -- -- -- -- -- X  -- -- --
+T6 Perc:-- -- X  -- -- -- X  -- -- -- X  -- -- X  -- --
+T5 Clap:-- -- -- -- X  -- -- -- -- -- -- -- X  -- -- --
+T4 OH:  -- -- -- -- -- -- -- X  -- -- -- -- -- -- -- X
+T3 CH:  X  -- X  -- X  -- X  -- X  -- X  -- X  -- X  --
+T2 Snr: -- -- -- -- X  -- -- -- -- -- -- -- X  -- -- --
+T1 Kick:X  -- -- X  -- -- X  -- X  -- -- X  -- -- -- --</div>
+  <h3>Exercise 6B — make it human without making it sloppy</h3>
+  <ol class="steps">
+    <li>Hold the snare steps and set velocity around 105 on step 5 and 112 on step 13.</li>
+    <li>Set closed-hat velocities alternating 70 and 55.</li>
+    <li>Add probability: percussion track steps 3, 7, 11, 14 at 70–85%.</li>
+    <li>Add a short repeat to the tom on step 13, but set probability to 50%. This creates a fill that appears sometimes, not always.</li>
+    <li>Hold <span class="kbd">[Mute]</span>. Use column 1 to mute rows/tracks and column 16 to solo rows/tracks while judging the groove.</li>
+  </ol>
+  <h3>Exercise 6C — polymetric hats</h3>
+  <ol class="steps">
+    <li>Select track 3 closed hat. Set its end to step 15 instead of 16.</li>
+    <li>Keep kick/snare at 16 steps.</li>
+    <li>Let it run for at least 64 steps. The hat phase will rotate against the beat. This is the simplest route to movement without adding new notes.</li>
+  </ol>
+</section>
+
+<section id="module7">
+  <h2>7. Generators: Euclidean, random, stochastic, and controlled surprise</h2>
+  <p>Generators are useful only when you set boundaries. Do not ask randomness to compose. Use generators to propose material, then edit, delete, and commit.</p>
+  <h3>Exercise 7A — Euclidean percussion</h3>
+  <ol class="steps">
+    <li>On the multitrack drum sequencer, select the percussion row/track.</li>
+    <li>Tap <span class="kbd">[Gen]</span> to open generator options.</li>
+    <li>Create a 5-hit pattern across 16 steps. If available, rotate the pattern until it avoids the main snare on steps 5 and 13.</li>
+    <li>Set velocity lower than kick/snare and probability around 75%.</li>
+    <li>Commit only if it improves the groove. Otherwise clear that track and retry.</li>
+  </ol>
+  <h3>Exercise 7B — Random generator with guardrails</h3>
+  <ol class="steps">
+    <li>Choose an empty Mono or Poly sequencer, not a finished one. Random generation can overwrite previous data.</li>
+    <li>Hold <span class="kbd">[Shift] + [Randomizer]</span> to open the random generator.</li>
+    <li>Constrain scale/root first. Use C minor, 16 steps, low density, moderate pitch range.</li>
+    <li>Generate. Immediately remove half the notes manually. Keep the best motif, not the whole output.</li>
+    <li>Save the pattern only after editing it into a usable musical phrase.</li>
+  </ol>
+  <h3>Exercise 7C — Stochastic sketch</h3>
+  <ol class="steps">
+    <li>Select an empty sequencer and set mode to <strong>STOC</strong>.</li>
+    <li>Understand the grid differently: columns represent note candidates rather than ordinary timeline steps.</li>
+    <li>Enter four notes: C2, Eb2, G2, Bb2. Assign probabilities: C = 100%, Eb = 70%, G = 85%, Bb = 40%.</li>
+    <li>Use random pitch/rhythm columns cautiously. Listen until a phrase emerges.</li>
+    <li>When it produces a phrase worth preserving, copy or recreate the useful result in Mono/Poly/Multitrack for deterministic editing.</li>
+  </ol>
+  <div class="warning"><strong>Rule of controlled surprise:</strong> randomization should produce raw material, not final form. The final form comes from deletion, probability design, and performance decisions.</div>
+</section>
+
+<section id="module8">
+  <h2>8. Modulation mastery: lanes, LFOs, Quick Assign, and musical automation</h2>
+  <p>Each sequencer has modulation lanes for parameter movement over time, plus LFOs for cyclic movement. A modulation lane is like a step sequencer for values rather than notes. It can drive external MIDI messages, CV-style changes, and internal sequencer parameters when mapped.</p>
+  <h3>Exercise 8A — MIDI CC filter sweep lane</h3>
+  <ol class="steps">
+    <li>Select the melodic sequencer that controls a synth with a filter cutoff CC.</li>
+    <li>Tap <span class="kbd">[Mod]</span> to open modulation lanes.</li>
+    <li>Tap <span class="kbd">(Knob 1)</span> to select modulation lane 1. If needed, configure its destination to the synth filter cutoff CC.</li>
+    <li>Set lane length to 16 with <span class="kbd">[Init]</span>/<span class="kbd">[End]</span> as needed.</li>
+    <li>Draw this value curve into lane 1: steps 1–4 = 20%, 5–8 = 45%, 9–12 = 80%, 13–16 = 35%.</li>
+    <li>Play the pattern. If the synth jumps too abruptly, smooth the lane or reduce modulation amount at the destination.</li>
+  </ol>
+  <div class="matrix">Lane 1 values: 20 20 20 20 | 45 45 45 45 | 80 80 80 80 | 35 35 35 35</div>
+  <h3>Exercise 8B — internal probability modulation</h3>
+  <ol class="steps">
+    <li>Pick a percussion or melodic fill step with probability below 100%.</li>
+    <li>Use the modulation matrix or Quick Assign to map a modulation source to trigger probability or randomization where available.</li>
+    <li>Set modulation amount small first: ±10–20%. Avoid maximum depth until you understand the effect.</li>
+    <li>Listen for structural variation over 2–4 bars, not just one loop.</li>
+  </ol>
+  <h3>Exercise 8C — LFO on a destination</h3>
+  <ol class="steps">
+    <li>Press <span class="kbd">[LFO]</span> to open LFO settings for the selected sequencer.</li>
+    <li>Select LFO 1. Set wave to triangle, rate to 1/2 or 1 bar, amount low.</li>
+    <li>Set destination to a filter, timbre, pan, or internal parameter. If a parameter shows as modulatable, use <span class="kbd">[Shift]</span> + long press the parameter knob for Quick Assign.</li>
+    <li>Increase amount until you clearly hear motion, then reduce it by one third. This prevents novelty from overwhelming the pattern.</li>
+  </ol>
+  <h3>Modulation diagnosis</h3>
+  <table class="seq"><tr><th>Problem</th><th>Likely cause</th><th>Fix</th></tr><tr><td>No movement</td><td>Lane muted, no destination, wrong MIDI CC/channel, or amount at zero.</td><td>Unmute lane, check output/channel, assign destination, raise amount.</td></tr><tr><td>Movement too abrupt</td><td>Values jump step-to-step.</td><td>Smooth, reduce amount, or use LFO instead of stepped lane.</td></tr><tr><td>Everything changes too much</td><td>Depth too high or destination too sensitive.</td><td>Reduce amount, narrow values, use offset.</td></tr><tr><td>Movement disappears on pattern change</td><td>Mapping was pattern-level instead of project-level.</td><td>Use the appropriate pattern/project assignment in Quick Assign.</td></tr></table>
+</section>
+
+<section id="module9">
+  <h2>9. Performance tools: Keyboard, Arp, Flow, Roller, Perform, Snapshots</h2>
+  <h3>Exercise 9A — Keyboard recording</h3>
+  <ol class="steps">
+    <li>Select a Mono or Poly sequencer.</li>
+    <li>Press <span class="kbd">[Keyboard]</span>. Use the grid as a playable note surface.</li>
+    <li>Press <span class="kbd">[Rec] + [Play]</span> for step recording, or arm recording with <span class="kbd">[Rec] + [Stop]</span> if you want recording to begin on note input.</li>
+    <li>Record four notes, stop, return to sequencer view, and edit gate/velocity per step.</li>
+  </ol>
+  <h3>Exercise 9B — Flow as alternate reality</h3>
+  <p>Flow steps only trigger when Flow is held. Use them for fills, alternate notes, or temporary rhythmic injections.</p>
+  <ol class="steps">
+    <li>On sequencer 1, hold <span class="kbd">[Flow]</span> and tap step 4 at G#2.</li>
+    <li>Hold <span class="kbd">[Flow]</span> and tap step 6 at A#2.</li>
+    <li>Play the sequence without holding Flow. The base phrase should remain unchanged.</li>
+    <li>Hold <span class="kbd">[Flow]</span> during playback. The added notes should appear only during the held interval.</li>
+  </ol>
+  <h3>Exercise 9C — Perform grid transposition</h3>
+  <ol class="steps">
+    <li>Press <span class="kbd">[Perf]</span>. Each row represents a sequencer performance control area.</li>
+    <li>For Mono/Chord/Poly sequencers, use pads around the central neutral column to transpose. Move sequencer 1 up, sequencer 2 down, then return both to neutral.</li>
+    <li>Hold <span class="kbd">[Shift]</span> while pressing a performance pad where rotation is available. Listen for rhythmic offset without changing pitch.</li>
+    <li>Practice 16 bars: bars 1–4 neutral, bars 5–8 transpose sequencer 2, bars 9–12 use Flow, bars 13–16 return and mute one layer.</li>
+  </ol>
+  <h3>Exercise 9D — Snapshot discipline</h3>
+  <ol class="steps">
+    <li>Create a stable “home” state: all important sequencers unmuted, transpositions neutral, modulation reasonable.</li>
+    <li>Capture a snapshot.</li>
+    <li>Create a performance chaos state: mutes, transpositions, Flow, random perform, roller, and modulation changes.</li>
+    <li>Recall the snapshot. The audience hears risk; you retain a safety net.</li>
+  </ol>
+</section>
+
+<section id="module10">
+  <h2>10. Arranger: turn patterns into a song</h2>
+  <p>The Arranger is where loops become form. A song consists of organized pattern launches and slots. Use it once your patterns are strong enough to survive repetition.</p>
+  <h3>Exercise 10A — create a five-part arrangement</h3>
+  <ol class="steps">
+    <li>Create or duplicate pattern variations for bass, drums, chords, and lead. Keep names simple: A, A2, B, Break, End.</li>
+    <li>Press <span class="kbd">[Arranger]</span> to enter arranger view. Use <span class="kbd">[Shift] + [Arranger]</span> to enable/disable arranger operation as needed.</li>
+    <li>Create these sections: Intro 8 bars, Groove A 16 bars, Variation 16 bars, Break 8 bars, Final 16 bars.</li>
+    <li>Assign patterns to slots. For Intro, use drums without kick, pad only, no lead. For Groove A, add kick/bass/chords. For Variation, add lead and modulation. For Break, remove kick and use Flow fills. For Final, restore full pattern and add performance transposition.</li>
+    <li>Set launch quantization so pattern changes occur musically, normally on bar boundaries for structured songs.</li>
+    <li>Save project. Then play the arrangement end-to-end without touching anything. Mark weak transitions and fix pattern content rather than over-editing the arranger.</li>
+  </ol>
+  <table class="seq"><tr><th>Section</th><th>Bars</th><th>Drums</th><th>Bass</th><th>Chords</th><th>Lead</th><th>Modulation</th></tr><tr><td>Intro</td><td>8</td><td>Hats/Perc</td><td>Off</td><td>Pad</td><td>Off</td><td>Filter slow</td></tr><tr><td>Groove A</td><td>16</td><td>Full A</td><td>A</td><td>A</td><td>Off</td><td>Subtle</td></tr><tr><td>Variation</td><td>16</td><td>Full A2</td><td>A2</td><td>A</td><td>A</td><td>More active</td></tr><tr><td>Break</td><td>8</td><td>No kick</td><td>Held note</td><td>Reduced</td><td>Flow fills</td><td>Open filter</td></tr><tr><td>Final</td><td>16</td><td>Full B</td><td>B</td><td>B</td><td>B</td><td>Peak then reset</td></tr></table>
+</section>
+
+<section id="module11">
+  <h2>11. Connectivity: MIDI, CV/Gate, clock, and troubleshooting logic</h2>
+  <h3>MIDI setup checklist</h3>
+  <ol class="steps">
+    <li>Choose transport and note path: USB MIDI, TRS MIDI, Bluetooth MIDI, or a splitter/host setup.</li>
+    <li>For each sequencer, hold <span class="kbd">[Shift] + [Seq]</span>, set output and MIDI channel.</li>
+    <li>Match the receiving synth/DAW track to that channel. If there is no sound, first check channel mismatch before changing notes.</li>
+    <li>Use the MIDI input monitor when diagnosing external controllers: hold <span class="kbd">[Shift]</span> + hold <span class="kbd">[Back]</span> for more than 2 seconds.</li>
+  </ol>
+  <h3>CV/Gate setup checklist</h3>
+  <ol class="steps">
+    <li>Patch CV output to oscillator pitch input and Gate output to envelope/gate input.</li>
+    <li>Hold <span class="kbd">[Shift] + [Gen]</span> to access CV/Gate mapping.</li>
+    <li>Set voltage behavior appropriate to the target. Gate outputs are configurable, so do not assume every module wants the same level.</li>
+    <li>Use one simple C2 step first. If pitch is wrong, solve calibration/scaling before adding complexity.</li>
+  </ol>
+  <h3>Clock decision tree</h3>
+  <table class="seq"><tr><th>Situation</th><th>Recommended master</th><th>Reason</th></tr><tr><td>Hardware-only live set centered on OXI</td><td>OXI ONE</td><td>Performance controls and pattern changes stay central.</td></tr><tr><td>DAW arrangement with OXI as sequencer</td><td>DAW or OXI, but choose one</td><td>Avoid two masters. Use one source for tempo and start/stop.</td></tr><tr><td>Modular rack with clock dividers</td><td>OXI or modular master</td><td>Pick whichever device controls resets most reliably.</td></tr></table>
+  <h3>Fault isolation</h3>
+  <div class="matrix">No sound:
+1. Does the synth make sound manually?
+2. Is OXI playing? [Play]
+3. Is the sequencer muted?
+4. Is the pattern length nonzero and are steps active?
+5. Is the output path correct: USB/TRS/BLE/CV?
+6. Is the MIDI channel or CV/Gate mapping correct?
+7. Is preview on if you expect pad audition? [Shift] + [Keyboard]
+8. Are clock settings preventing playback?</div>
+</section>
+
+<section id="module12">
+  <h2>12. Master practice projects and assessment checklist</h2>
+  <h3>Project A — Minimal techno machine</h3>
+  <table class="seq"><tr><th>Sequencer</th><th>Mode</th><th>Role</th><th>Constraint</th></tr><tr><td>1</td><td>Mono</td><td>Bass</td><td>6-step phrase, C minor, probability on final note.</td></tr><tr><td>2</td><td>Mono</td><td>Counter melody</td><td>8-step phrase copied from bass then edited.</td></tr><tr><td>3</td><td>Multitrack</td><td>Drums</td><td>Kick/snare stable; hats 15-step cycle.</td></tr><tr><td>4</td><td>Chord</td><td>Stabs</td><td>Four stored chords, repeats only on cadence.</td></tr><tr><td>5</td><td>Stochastic</td><td>Texture</td><td>Four notes, no note below 40% except root at 100%.</td></tr><tr><td>6</td><td>Any</td><td>Modulation</td><td>At least one CC lane and one LFO destination.</td></tr></table>
+  <h3>Project B — Modular control study</h3>
+  <ol class="steps">
+    <li>Use one Mono sequencer to control a single analog voice through CV/Gate.</li>
+    <li>Use another sequencer to output a modulation lane to a filter or timbre parameter.</li>
+    <li>Use a Multitrack sequencer for trigger/gate events to drums or envelopes.</li>
+    <li>Set clock direction deliberately. Record one pass with OXI as master, one with external clock if your setup supports it.</li>
+  </ol>
+  <h3>Mastery checklist</h3>
+  <div class="grid">
+    <div class="card"><strong>Navigation</strong><p>You can select any sequencer, change mode, set channel/output, return home, and save without hesitation.</p></div>
+    <div class="card"><strong>Editing</strong><p>You can place, tie, clear, copy, paste, shift, length-limit, and page through steps accurately.</p></div>
+    <div class="card"><strong>Expression</strong><p>You use velocity, gate, repeats, probability, swing, groove, and time division as intentional composition tools.</p></div>
+    <div class="card"><strong>Modes</strong><p>You know when to use Mono, Poly, Multitrack, Chord, Stochastic, Matriceal, Domino, Saga, and MIDI Player.</p></div>
+    <div class="card"><strong>Modulation</strong><p>You can build a modulation lane, assign a MIDI/internal destination, use an LFO, and diagnose missing modulation.</p></div>
+    <div class="card"><strong>Performance</strong><p>You can perform with mute, Flow, transposition, rotation, Roller, random perform, and snapshots without losing the song.</p></div>
+    <div class="card"><strong>Arrangement</strong><p>You can transform patterns into a multi-section song with meaningful transitions.</p></div>
+    <div class="card"><strong>Connectivity</strong><p>You can solve no-sound, wrong-channel, wrong-clock, and wrong-CV/Gate problems methodically.</p></div>
+  </div>
+  <div class="success" style="margin-top:18px"><strong>Final exam:</strong> In 45 minutes, create a new project from zero with one bass sequence, one drum multitrack, one chord sequence, one modulation lane, one Flow variation, one performance snapshot, and a five-section arrangement. Save it internally and copy it to the microSD card. If you can do that without referring to the manual, you are operationally fluent.</div>
+</section>
+
+<footer class="small" style="margin:42px 0 20px;border-top:1px solid var(--line);padding-top:18px">
+  <p>Prepared from the uploaded <em>OXI ONE MKII Manual, Official User Manual v2.0a</em>. This tutorial paraphrases and reorganizes the manual into a practice curriculum; it is not a replacement for the official reference.</p>
+</footer>
+</main>
+</body>
+</html>
